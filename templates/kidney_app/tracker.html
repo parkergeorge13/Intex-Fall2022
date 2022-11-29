@@ -14,9 +14,9 @@
     <nav class="navbar">
         <img src="{% static 'img/NKFLogo.svg'%}" onclick="transitionToPage(`{%url 'landing'%}`)"></img>
         <div class="links">
-            <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Home</span>
+            <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Log In</span>
             <button class="getStartedButton">                    
-                <span onclick="transitionToPage(`{%url 'index'%}`)" class="hrefText">Create Account</span>
+                <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Get Started</span>
             </button>
         </div>
     </nav>
@@ -24,21 +24,21 @@
         <div class='buttonsContainer'>
             <div>
                 <button type="submit" value="breakfast">
-                    <span onclick="transitionToPage(`{%url 'searchFood'%}`)">Breakfast</span>
+                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Breakfast</span>
                 </Button>
                 <button type="submit" value='lunch' class ='smButton'>
-                    <span onclick="transitionToPage(`{%url 'searchFood'%}`)">Lunch</span>
+                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Lunch</span>
                 </button>
                 <button type="submit" class ='smButton' value="dinner">
-                    <span onclick="transitionToPage(`{%url 'searchFood'%}`)">Dinner</span>
+                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Dinner</span>
                 </button>
             </div>
             <div class="secondRow">
                 <button type="submit" class ='smButton' value="snack">
-                    <span onclick="transitionToPage(`{%url 'searchFood'%}`)">Snack</span>
+                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Snack</span>
                 </button>
                 <button type="submit" class ='smButton' value="water">
-                    <span onclick="transitionToPage(`{%url 'searchFood'%}`)">Water</span>
+                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Water</span>
                 </button>
             </div>
         </div>

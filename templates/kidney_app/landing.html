@@ -14,7 +14,7 @@
     <nav class="navbar">
         <img src="{%static 'img/NKFLogo.svg'%}" onclick="transitionToPage(`{%url 'landing'%}`)"></img>
         <div class="links">
-            <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Home</span>
+            <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Log In</span>
             <button class="getStartedButton">                    
                 <span onclick="transitionToPage(`{%url 'index'%}`)" class="hrefText">Create Account</span>
             </button>
@@ -35,6 +35,10 @@
             <br>
             <span onclick="transitionToPage(`{%url 'index'%}`)" >Create Account</span>
         </form>
+        <br><br>
+        <button class="getStartedButton" type="submit">                    
+            <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Sign In</span>
+        </button>
     </div>
 
 </body>

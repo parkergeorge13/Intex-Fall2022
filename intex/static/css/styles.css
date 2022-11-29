@@ -271,3 +271,39 @@ span {
     background-color: #FCE5CD;
     border-radius: 10rem;
 }
+
+/*Search Food Page */
+.searchBar {
+    margin-top: calc(100vh * 0.07);
+    margin-left: calc(100vw * 0.35);
+}
+
+.searchBar input {
+    background-color: #FEF9F5;
+    border:none;
+    padding: 1rem;
+    border-radius: 15px;
+    width: 120%;
+}
+
+.searchBar button {
+    margin-left:calc(100vw * 0.07);
+}
+
+/* Create Food Page */
+.createFood {
+    margin-top: calc(100vh * 0.07);
+    margin-left: calc(100vw * 0.35);
+}
+
+.createFood input {
+    background-color: #FEF9F5;
+    border:none;
+    padding: 1rem;
+    border-radius: 15px;
+    width: 120%;
+}
+
+.createFood button {
+    margin-left:calc(100vw * 0.07);
+}

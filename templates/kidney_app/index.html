@@ -14,7 +14,7 @@
     <nav class="navbar">
         <img src="{%static 'img/NKFLogo.svg'%}" onclick="transitionToPage(`{%url 'landing'%}`)"></img>
         <div class="links">
-            <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Home</span>
+            <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Log In</span>
             <button class="getStartedButton">                    
                 <span onclick="transitionToPage(`{%url 'index'%}`)" class="index">Create Account</span>
             </button>
@@ -58,13 +58,12 @@
             <div class="inline_block">
                 <label for="height">Height:</label>
                 <br>
-                <input type="number" id="height_feet" name="height" placeholder="ft">
-                <input type="number" id="height_inches" name="height" placeholder="inches">
+                <input type="number" id="height" name="height" placeholder="m">
             </div>
             <div class="inline_block">
                 <label for="weight">Weight:</label>
                 <br>
-                <input type="number" id="weight" name="weight" placeholder="Ib">
+                <input type="number" id="weight" name="weight" placeholder="kg">
             </div>
             <br>
             <div class="inline_block">

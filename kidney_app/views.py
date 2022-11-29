@@ -3,12 +3,15 @@ from django.shortcuts import render
 # Create your views here.
 def landingPageView(request):
     return render(request, 'kidney_app/landing.html')
-    
+
 def indexPageView(request) :
     return render(request, 'kidney_app/index.html')
 
 def trackerPageView(request):
     return render(request, 'kidney_app/tracker.html')
+
+def displayFoodPageView(request):
+    return render(request, 'kidney_app/displayFood.html')
 
 def searchFoodPageView(request):
     return render(request, 'kidney_app/searchFood.html')

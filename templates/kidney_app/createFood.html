@@ -14,13 +14,19 @@
     <nav class="navbar">
         <img src="{% static 'img/NKFLogo.svg'%}" onclick="transitionToPage(`{%url 'landing'%}`)"></img>
         <div class="links">
-            <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Home</span>
+            <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Log In</span>
             <button class="getStartedButton">                    
-                <span onclick="transitionToPage(`{%url 'index'%}`)" class="hrefText">Create Account</span>
+                <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Get Started</span>
             </button>
         </div>
     </nav>
     <div class="logBar">
+        <div class="inline_block grey">
+            <span onclick="transitionToPage(`{%url 'displayFood'%}`)" class="href">
+                Food Journal
+            </span>
+        </div>
+        <div class="inline_block divider">|</div>
         <div class="inline_block grey">
             <span onclick="transitionToPage(`{%url 'searchFood'%}`)" class="href">
                 Search Food
@@ -32,6 +38,16 @@
                 <u>Create New Food</u>
             </span>
         </div>
+    </div>
+    <div class="createFood">
+        <form class="inline_block">
+            <label for="createFood">Create New Food Item:</label>
+            <br>
+            <input type="text" id="createFood" name="createFood" placeholder="Enter food name">
+        </form>
+        <button class="getStartedButton inline_block">                    
+            <span onclick="transitionToPage(`{%url 'searchFood'%}`)" class="index">Create Food</span>
+        </button>
     </div>
 </body>
 </html>
