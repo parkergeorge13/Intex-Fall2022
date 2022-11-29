@@ -51,8 +51,8 @@ span {
 }
 
 
-.signIn p{
-    font-size: 30px;
+.signInP{
+    font-size: 40px;
 }
 
 .signIn input{
@@ -60,7 +60,17 @@ span {
     border:none;
     padding: 1rem;
     border-radius: 15px;
-    z-index: 4
+    z-index: 4;
+    width: 40%
+}
+
+.signIn input{
+    padding-bottom: 3px;
+}
+
+.signIn span {
+    font-size:12px;
+    text-decoration: underline;
 }
 
 /* Navigation Bar*/
@@ -81,6 +91,10 @@ span {
 .navbar img {
     display: block;
     margin: 1.5rem 0rem 1.5rem 2rem;
+}
+
+.navbar img:hover {
+    cursor: pointer;
 }
 
 .links {
@@ -142,8 +156,7 @@ span {
 
 .forms {
     display:block;
-    /* margin:-37rem 0rem 0rem 40rem; */
-    margin-top: calc(100vh * -0.7);
+    margin-top: calc(100vh * (-0.75));
     margin-left: calc(100vw * 0.5)
 }
 

@@ -156,8 +156,7 @@ span {
 
 .forms {
     display:block;
-    /* margin:-37rem 0rem 0rem 40rem; */
-    margin-top: calc(100vh * -0.7);
+    margin-top: calc(100vh * (-0.75));
     margin-left: calc(100vw * 0.5)
 }
 
