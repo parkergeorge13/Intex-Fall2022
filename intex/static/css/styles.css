@@ -28,6 +28,53 @@ span {
     cursor:pointer
 }
 
+/* Landing Page */
+
+/* @keyframes slidein {
+    from {
+      transform: translateY(100%);
+    }
+  
+    to {
+      transform: translateY(0%);
+    }
+  } */
+
+.landingPage img{
+    width: 100vw;
+    padding-top: calc(0.04* 100vh);
+    object-position: bottom;
+    opacity: 20%;
+    border-top-right-radius: 30rem;
+    border-top-left-radius: 30rem;
+    z-index: 0;
+}
+
+
+.signInP{
+    font-size: 40px;
+}
+
+.signIn input{
+    background-color: #FEF9F5;
+    border:none;
+    padding: 1rem;
+    border-radius: 15px;
+    z-index: 4;
+    width: 40%
+}
+
+.signIn input{
+    padding-bottom: 3px;
+}
+
+.signIn span {
+    font-size:12px;
+    text-decoration: underline;
+}
+
+/* Navigation Bar*/
+
 .homeButton {
     margin-right: 3rem;
     transition-duration: 0.5s;
@@ -44,6 +91,10 @@ span {
 .navbar img {
     display: block;
     margin: 1.5rem 0rem 1.5rem 2rem;
+}
+
+.navbar img:hover {
+    cursor: pointer;
 }
 
 .links {

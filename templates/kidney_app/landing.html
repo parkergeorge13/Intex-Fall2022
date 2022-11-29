@@ -12,7 +12,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <img src="{% static 'img/NKFLogo.svg'%}" onclick="transitionToPage(`{%url 'landing'%}`)"></img>
+        <img src="{%static 'img/NKFLogo.svg'%}" onclick="transitionToPage(`{%url 'landing'%}`)"></img>
         <div class="links">
             <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Home</span>
             <button class="getStartedButton">                    
@@ -20,18 +20,22 @@
             </button>
         </div>
     </nav>
-    <div class="logBar">
-        <div class="inline_block grey">
-            <span onclick="transitionToPage(`{%url 'searchFood'%}`)" class="href">
-                Search Food
-            </span>
-        </div>
-        <div class="inline_block divider">|</div>
-        <div class="inline_block grey">
-            <span onclick="transitionToPage(`{%url 'createFood'%}`)" class="href">
-                <u>Create New Food</u>
-            </span>
-        </div>
+    <img src="{%static 'img/herbs.jpg'%}" class="woodImage"></img>
+    <div class="forms">
+        <p class="signInP">Sign In</p>
+        <form class="signIn">
+            <label for="username">User Name:</label>
+            <br>
+            <input type="text" id="username" name="username">
+            <br><br>
+            <label for="password">Password:</label>
+            <br>
+            <input type="password" id="password" name="password">
+            <br>
+            <br>
+            <span onclick="transitionToPage(`{%url 'index'%}`)" >Create Account</span>
+        </form>
     </div>
+
 </body>
 </html>

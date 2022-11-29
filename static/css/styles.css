@@ -15,6 +15,10 @@ body {
     transition: opacity .5s;
 }
 
+@-ms-viewport{
+    width: device-width
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -23,6 +27,43 @@ code {
 span {
     cursor:pointer
 }
+
+/* Landing Page */
+
+/* @keyframes slidein {
+    from {
+      transform: translateY(100%);
+    }
+  
+    to {
+      transform: translateY(0%);
+    }
+  } */
+
+.landingPage img{
+    width: 100vw;
+    padding-top: calc(0.04* 100vh);
+    object-position: bottom;
+    opacity: 20%;
+    border-top-right-radius: 30rem;
+    border-top-left-radius: 30rem;
+    z-index: 0;
+}
+
+
+.signIn p{
+    font-size: 30px;
+}
+
+.signIn input{
+    background-color: #FEF9F5;
+    border:none;
+    padding: 1rem;
+    border-radius: 15px;
+    z-index: 4
+}
+
+/* Navigation Bar*/
 
 .homeButton {
     margin-right: 3rem;
@@ -101,7 +142,9 @@ span {
 
 .forms {
     display:block;
-    margin:-37rem 0rem 0rem 40rem;
+    /* margin:-37rem 0rem 0rem 40rem; */
+    margin-top: calc(100vh * -0.7);
+    margin-left: calc(100vw * 0.5)
 }
 
 .inline_block input{
@@ -109,7 +152,7 @@ span {
     border:none;
     padding: 1rem;
     border-radius: 15px;
-    margin: 0rem 1rem 1rem 0rem
+    margin: 0rem 10px 10px 0rem
 }
 
 .inline_block label {
@@ -128,9 +171,9 @@ span {
 
 .buttonsContainer {
     height: calc(0.4 * (100vh - 6rem));
-    padding-left: 4rem;
-    padding-top: 2rem;
-    margin-left: 3rem
+    padding-left: calc(0.1 * (100vw - 6rem));
+    padding-top: calc(0.05 * (100vh - 6rem));
+    margin-left: calc(0.01 * (100vw - 6rem));
 }
 
 .buttonsContainer button {
@@ -142,7 +185,9 @@ span {
     box-shadow: 2px 2px 5px #F8C997;
     transition-duration: 0.5s;
     font-size: 20px;
-    margin: 5rem 3rem -1rem 0.4rem;
+    /* margin: 5rem 3rem -1rem 0.4rem; */
+    margin-top: calc(0.1 * (100vh - 6rem));
+    margin-right: calc(0.05 * (100vw - 6rem));
 
 }
 
@@ -175,7 +220,7 @@ span {
     height: calc(0.7* (100vh - 6rem));
     border: 1px solid black;
     width: 40%; 
-    margin-left: calc(0.9 * 100vh);
+    margin-left: calc(0.5 * 100vw);
     margin-top: calc(-0.3 * 100vh);
     background-color: #FDF4EB;
     border-radius: 1.2rem;
