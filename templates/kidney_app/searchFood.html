@@ -1,0 +1,37 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{%static 'css/styles.css' %}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <script src="{% static 'js/myscripts.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="{% static 'img/NKFLogo.svg'%}"></img>
+        <div class="links">
+            <span onclick="transitionToPage(`{%url 'index'%}`)" class="homeButton">Home</span>
+            <button class="getStartedButton">                    
+                <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Get Started</span>
+            </button>
+        </div>
+    </nav>
+    <div class="logBar">
+        <div class="inline_block grey">
+            <span onclick="transitionToPage(`{%url 'searchFood'%}`)" class="href">
+                <u>Search Food</u>
+            </span>
+        </div>
+        <div class="inline_block divider">|</div>
+        <div class="inline_block grey">
+            <span onclick="transitionToPage(`{%url 'createFood'%}`)" class="href">
+                Create New Food
+            </span>
+        </div>
+    </div>
+</body>
+</html>

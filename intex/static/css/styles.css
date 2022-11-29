@@ -1,0 +1,215 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0px;
+    padding: 0px;
+    height: 100vh;
+    --navbar-height: 7rem;
+    background-color: #FBEBDB;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+span {
+    cursor:pointer
+}
+
+.homeButton {
+    margin-right: 3rem;
+    transition-duration: 0.5s;
+}
+
+
+.navbar{
+    background-color: #FBEBDB;
+    height: var(--navbar-height);
+    border-bottom: 1px solid black;
+    margin: 0rem 3rem 0rem 3rem;
+}
+
+.navbar img {
+    display: block;
+    margin: 1.5rem 0rem 1.5rem 2rem;
+}
+
+.links {
+    text-align: right;
+    display: block;
+    padding-right: calc(0.2 * 100vh);
+    margin-top: -4rem;
+}
+
+.navbar .href {
+    padding-right: 3rem;
+    color: black;
+    font-family:'Inter';
+    font-size: 18px;
+    text-decoration: none;
+}
+
+/* Index Page */ 
+
+.woodImage {
+    margin: 1rem 4rem 1rem 3rem;
+    height: calc(0.78 * 100vh);
+    border-radius: 100px;
+}
+
+.getStartedButton {
+    background-color:#F05E22;
+    border-radius:20px;
+    padding: 0.7rem 1.2rem 0.7rem 1.2rem;
+    border: none;
+    color:white;
+    font-family:'Inter';
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.getStartedButton a{
+    color: white;
+    text-decoration: none;
+    font-size:18px;
+}
+
+.bottom {
+    margin-left: 100vh;
+    margin-top: 3rem;
+}
+
+
+.navbar .hrefText {
+    color: white;
+    font-family:'Inter';
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.inline_block {
+    display: inline-block;
+}
+
+.forms {
+    display:block;
+    margin:-37rem 0rem 0rem 40rem;
+}
+
+.inline_block input{
+    background-color: #FEF9F5;
+    border:none;
+    padding: 1rem;
+    border-radius: 15px;
+    margin: 0rem 1rem 1rem 0rem
+}
+
+.inline_block label {
+    display:block;
+}
+
+.home {
+    height: calc(100vh - 14rem);
+}
+
+/* Tracker Page */ 
+
+.mealButton {
+    background-color: #F05E22;
+}
+
+.buttonsContainer {
+    height: calc(0.4 * (100vh - 6rem));
+    padding-left: 4rem;
+    padding-top: 2rem;
+    margin-left: 3rem
+}
+
+.buttonsContainer button {
+    background-color: #F7AE90;
+    border-radius: 1rem;
+    display: inline-block;
+    padding: 1rem 1rem 1rem 1rem;
+    border: none;
+    box-shadow: 2px 2px 5px #F8C997;
+    transition-duration: 0.5s;
+    font-size: 20px;
+    margin: 5rem 3rem -1rem 0.4rem;
+
+}
+
+.buttonsContainer a{
+    color: black;
+    text-decoration: none;
+}
+
+.secondRow {
+    margin-left: 5rem
+}
+
+.buttonsContainer Button:hover {
+    background-color:#F05E22;
+}
+
+
+
+.buttonsContainer .smButton {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.suggestionBox {
+    height: calc(0.4 * (100vh - 6rem));
+}
+
+.suggContainer {
+    display: block;
+    height: calc(0.7* (100vh - 6rem));
+    border: 1px solid black;
+    width: 40%; 
+    margin-left: calc(0.9 * 100vh);
+    margin-top: calc(-0.3 * 100vh);
+    background-color: #FDF4EB;
+    border-radius: 1.2rem;
+    border:none;
+}
+
+.suggContainer p {
+    padding: 1.9rem 0rem 1.5rem 1rem;
+    border-bottom: 1px solid black;
+    font-size: 17px;
+    width: 85%;
+    margin: 0 auto
+}
+
+/* Log Page */ 
+
+.logBar {
+    padding: 1rem 0rem 1rem 0rem;
+    text-align: center;
+    margin: 0 auto;
+    border-bottom: 1px solid #C0C0C0;
+    width: 50%;
+}
+
+.logBar .divider {
+    padding: 0rem 3rem 0rem 3rem;
+}
+
+.logBar .grey {
+    padding: 1rem;
+    transition-duration: 0.5s;
+}
+
+.logBar .grey:hover {
+    background-color: #FCE5CD;
+    border-radius: 10rem;
+}

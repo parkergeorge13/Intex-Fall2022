@@ -1,0 +1,50 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{%static 'css/styles.css' %}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <script src="{% static 'js/myscripts.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="{% static 'img/NKFLogo.svg'%}"></img>
+        <div class="links">
+            <span onclick="transitionToPage(`{%url 'index'%}`)" class="homeButton">Home</span>
+            <button class="getStartedButton">                    
+                <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Get Started</span>
+            </button>
+        </div>
+    </nav>
+    <div class="home">
+        <div class='buttonsContainer'>
+            <div>
+                <button type="submit" value="breakfast">
+                    <span onclick="transitionToPage(`{%url 'searchFood'%}`)">Breakfast</span>
+                </Button>
+                <button type="submit" value='lunch' class ='smButton'>
+                    <span onclick="transitionToPage(`{%url 'searchFood'%}`)">Lunch</span>
+                </button>
+                <button type="submit" class ='smButton' value="dinner">
+                    <span onclick="transitionToPage(`{%url 'searchFood'%}`)">Dinner</span>
+                </button>
+            </div>
+            <div class="secondRow">
+                <button type="submit" class ='smButton' value="snack">
+                    <span onclick="transitionToPage(`{%url 'searchFood'%}`)">Snack</span>
+                </button>
+                <button type="submit" class ='smButton' value="water">
+                    <span onclick="transitionToPage(`{%url 'searchFood'%}`)">Water</span>
+                </button>
+            </div>
+        </div>
+        <div class="suggContainer">
+            <p>Suggested Food Items</p>
+        </div>  
+    </div>
+</body>
+</html>

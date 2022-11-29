@@ -1,12 +1,79 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intex</title>
+    <title>Document</title>
+    <link href="{%static 'css/styles.css' %}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <script src="{% static 'js/myscripts.js' %}"></script>
 </head>
 <body>
-    <h1> Hello World!</h1>
+    <nav class="navbar">
+        <img src="{%static 'img/NKFLogo.svg'%}"></img>
+        <div class="links">
+            <span onclick="transitionToPage(`{%url 'index'%}`)" class="homeButton">Home</span>
+            <button class="getStartedButton">                    
+                <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Get Started</span>
+            </button>
+        </div>
+    </nav>
+    <div>
+        <img src="{%static 'img/wood.jpg'%}" class="woodImage">
+        <form class="forms">
+            <div class="inline_block">
+                <label for="first_name">First Name:</label>
+                <br>
+                <input type="text" id="first_name" name="first_name">
+            </div>
+            <div class="inline_block">
+                <label for="last_name">Last Name:</label>
+                <br>
+                <input type="text" id="last_name" name="last_name">
+            </div>
+            <div class="inline_block">
+                <label for="gender">Gender:</label>
+                <br>
+                <input list="listGender" name="gender" id="txtGender">
+                <datalist name="gender" id="listGender">
+                    <option value="Male">
+                    <option value="Female">
+                </datalist>
+            </div>
+            <br>
+            <div class="inline_block">
+                <label for="email">Email:</label>
+                <br>
+                <input type="text" id="email" name="email">
+            </div>
+            <div class="inline_block">                            
+                <label for="birthDate">Birth Date:</label>
+                <br>
+                <input type="date" id="birthDate" name="birthDate"
+                min="2021-11-01" max="2022-06-30" onkeydown="return false">
+            </div>
+            <br>
+            <div class="inline_block">
+                <label for="height">Height:</label>
+                <br>
+                <input type="number" id="height_feet" name="height" placeholder="ft">
+                <input type="number" id="height_inches" name="height" placeholder="inches">
+            </div>
+            <div class="inline_block">
+                <label for="weight">Weight:</label>
+                <br>
+                <input type="number" id="weight" name="weight" placeholder="Ib">
+            </div>
+            <br>
+            <div class="inline_block">
+                <label for="healthConcern">Health Concern</label>
+                <br>
+                <input style="width: 150%" type="text" id="healthConcern" name="healthConcern">
+            </div>
+        </form>
+        <button type="button" class="getStartedButton bottom">                    
+            <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Get Started</span>
+        </button>
 </body>
-</html>
