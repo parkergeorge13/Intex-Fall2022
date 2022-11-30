@@ -18,3 +18,12 @@ def searchFoodPageView(request):
 
 def createFoodPageView(request):
     return render(request, 'kidney_app/createFood.html')
+
+def search_food(request):
+    if request.method == 'POST':
+        food = request.POST.get('search')
+    context = {
+        "food" : food
+    }
+    return render(request, 'kidney_app/searchFood.html', context)            
+
