@@ -9,8 +9,8 @@ class Account(models.Model):
     last_name = models.CharField(max_length=25)
     gender = models.CharField(max_length=25)
     birth_date = models.DateField(default=datetime.today, blank=True)
-    height = models.IntegerField(default=0)
-    weight = models.IntegerField(default=0)
+    height = models.FloatField(default=0)
+    weight = models.FloatField(default=0)
     condition = models.CharField(max_length=25)
 
     def __str__(self):

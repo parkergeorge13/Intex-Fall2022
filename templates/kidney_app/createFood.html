@@ -1,4 +1,5 @@
 {%load static%}
+{%block content%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,15 +40,18 @@
             </span>
         </div>
     </div>
-    <div class="createFood">
-        <form class="inline_block">
-            <label for="createFood">Create New Food Item:</label>
-            <br>
-            <input type="text" id="createFood" name="createFood" placeholder="Enter food name">
-        </form>
-        <button class="getStartedButton inline_block">                    
-            <span onclick="transitionToPage(`{%url 'searchFood'%}`)" class="index">Create Food</span>
-        </button>
-    </div>
+        <br>
+        <br>
+        <div class="createFoodBar">
+            <form class="inline_block" name="form" method="post" action="{% url 'createFood' %}">
+                {%csrf_token%}
+                <br>
+                <input type="text" name='food_desc' id='food_desc'  placeholder="Food Name" autofocus>
+                <button type="submit" class="getStartedButton inline_block">                    
+                    <span onclick="transitionToPage(`{%url 'searchFood'%}`)" class="index">Create Food</span>
+                </button>
+            </form>
+        </div>
 </body>
 </html>
+{%endblock%}

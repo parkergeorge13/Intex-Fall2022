@@ -154,7 +154,7 @@ span {
     display: inline-block;
 }
 
-.forms {
+.createAccount form{
     display:block;
     margin-top: calc(100vh * (-0.75));
     margin-left: calc(100vw * 0.5)

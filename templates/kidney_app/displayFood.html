@@ -39,5 +39,17 @@
             </span>
         </div>
     </div>
+
+    <h1><b>FOOD</b></h1>
+    <div class='container'>
+        {%for food in food %}
+        <p>
+            <a class='btn btn-primary' href="{% url "deleteFood" id=food.id %}">Delete</a>
+            {{food.food_desc }}
+            <a class='btn btn-primary' href="{% url "editSingleFood" id=food.id %}">Edit</a>
+        </p>
+        {%endfor%}
+    </div>
+    
 </body>
 </html>

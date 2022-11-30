@@ -1,0 +1,18 @@
+{%load static%}
+{%block content%}
+<div class="container">
+    <div class="text-left">
+        <h2 class="section-heading text-uppercase">Edit Food</h2>
+    </div>
+    <br>
+    <form name="form" method="post" action="{% url 'editFood' %}">
+        {%csrf_token%}
+        <input type="hidden" id="id" name="id" value="{{food.id}}">
+
+        <label for='food_desc'>Food Name</label>
+        <input type="text" name='food_desc' id='food_desc' value="{{food.food_desc}}" autofocus>
+        <br>
+
+        <button type="submit">Add</button>
+    </form>
+{%endblock%}

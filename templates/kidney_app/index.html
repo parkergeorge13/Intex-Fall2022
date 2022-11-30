@@ -22,11 +22,12 @@
     </nav>
     <div>
         <img src="{%static 'img/wood.jpg'%}" class="woodImage">
-        <form class="forms">
+        <form class="forms" name="form" method="post" action="{% url 'index' %}">
+            {%csrf_token%}
             <div class="inline_block">
                 <label for="first_name">First Name:</label>
                 <br>
-                <input type="text" id="first_name" name="first_name">
+                <input type="text" id="first_name" name="first_name" autofocus>
             </div>
             <div class="inline_block">
                 <label for="last_name">Last Name:</label>
@@ -36,23 +37,18 @@
             <div class="inline_block">
                 <label for="gender">Gender:</label>
                 <br>
-                <input list="listGender" name="gender" id="txtGender">
-                <datalist name="gender" id="listGender">
+                <input list="listGender" name="gender" id="gender">
+                <datalist name="gender" id="gender">
                     <option value="Male">
                     <option value="Female">
                 </datalist>
             </div>
             <br>
-            <div class="inline_block">
-                <label for="email">Email:</label>
-                <br>
-                <input type="text" id="email" name="email">
-            </div>
             <div class="inline_block">                            
-                <label for="birthDate">Birth Date:</label>
+                <label for="birth_date">Birth Date:</label>
                 <br>
-                <input type="date" id="birthDate" name="birthDate"
-                min="2021-11-01" max="2022-06-30" onkeydown="return false">
+                <input type="date" id="birth_date" name="birth_date"
+                min="1900-11-01" max="2022-11-30" onkeydown="return false">
             </div>
             <br>
             <div class="inline_block">
@@ -67,9 +63,9 @@
             </div>
             <br>
             <div class="inline_block">
-                <label for="healthConcern">Health Concern</label>
+                <label for="condition">Health Concern</label>
                 <br>
-                <input style="width: 150%" type="text" id="healthConcern" name="healthConcern">
+                <input style="width: 150%" type="text" id="condition" name="condition">
             </div>
             <br>
             <div class="inline_block">
@@ -78,12 +74,14 @@
                 <input type="text" id="username" name="username">
             </div>
             <div class="inline_block">
-                <label for="password">Create PassWord:</label>
+                <label for="password">Create Password:</label>
                 <br>
                 <input type="password" id="password" name="password">
             </div>
+    
+            <button type="submit">Add Account</button>
+            <!--<button type="button" class="getStartedButton bottom">                    
+                <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Get Started</span>
+            </button>-->
         </form>
-        <button type="button" class="getStartedButton bottom">                    
-            <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Get Started</span>
-        </button>
 </body>
