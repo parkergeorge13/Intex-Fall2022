@@ -1,6 +1,6 @@
-def nutrition(food):
-    import requests, json
+import requests, json
 
+def nutrition(food):
     try: 
         # initial install when running the api: pip install lxml html5lib beautifulsoup4 requests 
         api_key = '70hA3deEKViqq4Q1UG7zkyUJDXk12UvOEUfe90wu'
