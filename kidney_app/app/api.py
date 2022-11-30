@@ -1,6 +1,5 @@
 def nutrition(food):
     import requests, json
-    import pandas as pd
 
     try: 
         # initial install when running the api: pip install lxml html5lib beautifulsoup4 requests 
@@ -81,5 +80,3 @@ def nutrition(food):
     except Exception as e:
         print('\nUnable to connect to the vending API.')
         print(e)
-
-print(nutrition('banana'))
