@@ -14,9 +14,9 @@
     <nav class="navbar">
         <img src="{% static 'img/NKFLogo.svg'%}" onclick="transitionToPage(`{%url 'landing'%}`)"></img>
         <div class="links">
-            <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Log In</span>
+            <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Log Out</span>
             <button class="getStartedButton">                    
-                <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Get Started</span>
+                <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Tracker</span>
             </button>
         </div>
     </nav>
@@ -32,20 +32,19 @@
                 Search Food
             </span>
         </div>
-        <div class="inline_block divider">|</div>
-        <div class="inline_block grey">
-            <span onclick="transitionToPage(`{%url 'createFood'%}`)" class="href">
-                Create New Food
-            </span>
-        </div>
     </div>
 
     <h1><b>FOOD</b></h1>
     <div class='container'>
         {%for food in food %}
+        
         <p>
             <a class='btn btn-primary' href="{% url "deleteFood" id=food.id %}">Delete</a>
-            {{food.food_desc }}
+            {{ food.food_desc }}
+            <p>Sodium: {{nutrient.sodium}}<p>
+            <p>Protein: {{nutrients.}}</p>
+            <p>Potassium: {{nutrients.2}}</p>
+            <p>Phosphorus: {{nutrients.3}}</p>
             <a class='btn btn-primary' href="{% url "editSingleFood" id=food.id %}">Edit</a>
         </p>
         {%endfor%}
