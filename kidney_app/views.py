@@ -1,4 +1,6 @@
 from django.shortcuts import render
+import requests, json
+
 from kidney_app.models import Food, Account
 
 # Create your views here.

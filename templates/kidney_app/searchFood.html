@@ -9,6 +9,7 @@
     <link href="{%static 'css/styles.css' %}" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <script src="{% static 'js/myscripts.js' %}"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -40,14 +41,21 @@
         </div>
     </div>
     <div class="searchBar">
-        <form class="inline_block">
+        <form class="inline_block" action="{% url 'search_food' %}" method="post">
+            {% csrf_token %}
             <label for="searchFood">Search For Food:</label>
             <br>
-            <input type="text" id="searchFood" name="searchFood" placeholder="search for food items">
+            <input type="text" id="search" name="search" placeholder="search for food items">
+            <button class="getStartedButton" type="submit" value="submit">
+                Search Food
+            </button>
         </form>
-        <button class="getStartedButton inline_block">                    
-            <span class="index">Search Food</span>
-        </button>
+    </div>
+    <div>
+        <h1>Sodium: {{nutrients.0}}</h1>
+        <h1>Protein: {{nutrients.1}}</h1>
+        <h1>Potassium: {{nutrients.2}}</h1>
+        <h1>Phosphorus: {{nutrients.3}}</h1>
     </div>
 </body>
 </html>

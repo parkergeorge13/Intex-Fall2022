@@ -10,7 +10,7 @@ body {
     height: 100vh;
     --navbar-height: 7rem;
     background-color: #FBEBDB;
-    overflow: hidden;
+    overflow: auto;
     opacity: 0;
     transition: opacity .5s;
 }
@@ -240,12 +240,19 @@ span {
     border:none;
 }
 
-.suggContainer p {
+.title{
     padding: 1.9rem 0rem 1.5rem 1rem;
     border-bottom: 1px solid black;
     font-size: 17px;
     width: 85%;
     margin: 0 auto
+}
+
+.two {
+    font-size: 15px;
+    width: 85%;
+    border-bottom:none;
+    margin: 0 auto;
 }
 
 /* Log Page */ 
