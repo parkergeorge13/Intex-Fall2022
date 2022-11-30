@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import requests, json
 
-from kidney_app.models import Food, Account
+from kidney_app.models import Food, Account, Nutrient
 
 # Create your views here.
 def landingPageView(request):
@@ -52,15 +52,21 @@ def deleteFoodPageView(request, id) :
 def createFoodPageView(request):
     if request.method == 'POST':
         food = Food()
+        nutrient = Nutrient()
 
-        food.food_desc = request.POST['food_desc']
+        food.food_desc = request.POST['food']
+        nutrient.sodium = request.POST['nutrients_0']
+        nutrient.protein = request.POST['nutrients_1']
+        nutrient.potassium = request.POST['nutrients_2']
+        nutrient.phosphorus = request.POST['nutrients_3']
 
         food.save()
+        nutrient.save()
 
         return displayFoodPageView(request)
         
     else :
-        return render(request, 'kidney_app/createFood.html')
+        return render(request, 'kidney_app/searchFood.html')
 
 def editFoodPageView(request) :
     if request.method == 'POST':
@@ -158,8 +164,8 @@ def nutrition(food):
         for i in range(0, len(food_nutrients_dict[0])):
             sorted_nutrients = []
             for ii in range(0, len(food_nutrients_dict)):
-                sorted_nutrients.append(float(food_nutrients_dict[ii][i]))
-            food_nutrients_dict_sorted[i] = sorted(sorted_nutrients, key = float)
+                sorted_nutrients.append(int(food_nutrients_dict[ii][i]))
+            food_nutrients_dict_sorted[i] = sorted(sorted_nutrients, key = int)
 
         # Output the median of all nutrients into one final dictionary (median because data is skewed)
         median_nutrients = {}
