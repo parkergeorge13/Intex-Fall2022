@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from kidney_app.models import Food, Account, Nutrient
 from kidney_app.api import *
-from kidney_app.models import Food, Account
 
 # Create your views here.
 def landingPageView(request):
