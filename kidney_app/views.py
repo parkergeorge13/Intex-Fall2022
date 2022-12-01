@@ -20,7 +20,6 @@ def sign_in(request):
 
         #check if un and pw exist
         un_check = []
-        pw_check = []
         for i in data:
             if str(i) == username + ' ' + password:
                 un_check.append(True)
