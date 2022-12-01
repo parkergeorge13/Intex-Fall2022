@@ -1,12 +1,49 @@
 from django.shortcuts import render
 from kidney_app.api import *
 from kidney_app.models import Food, Account
+from django.contrib import messages
 
 # Create your views here.
 def landingPageView(request):
     return render(request, 'kidney_app/landing.html')
 
+def sign_in(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        context = {
+            "username" : username,
+            'password' : password,
+            'duplicate' : False
+        }
+        data = Account.objects.all()
+
+        #check if un and pw exist
+        un_check = []
+        pw_check = []
+        for i in data:
+            if str(i) == username:
+                un_check.append(True)
+        for i in data:
+            if str(i) == password:
+                pw_check.append(True)
+        # If there are duplicates
+        if True in un_check and True in pw_check:
+            return trackerPageView(request)
+        # If no duplicates
+        else:
+            context['duplicate'] = True
+            return render(request, 'kidney_app/landing.html', context)
+
+    return render(request, 'kidney_app/landing.html', context)
+
 def indexPageView(request) :
+    data = Account.objects.all()
+    context = {
+        'acc' : data,
+        'duplicate' : False
+    }
+
     if request.method == 'POST':
         account = Account()
 
@@ -19,13 +56,23 @@ def indexPageView(request) :
         account.condition = request.POST['condition']
         account.username = request.POST['username']
         account.password = request.POST['password']
-
-        account.save()
-
-        return trackerPageView(request)
         
+        # Don't allow duplicate users
+        check = []
+        for i in data:
+            if str(i) == account.username:
+                check.append(True)
+        # If no duplicates
+        if True not in check:
+            account.save()
+            return landingPageView(request)
+        # If there are duplicates
+        else:
+            context['duplicate'] = True
+            return render(request, 'kidney_app/index.html', context)
+      
     else :
-        return render(request, 'kidney_app/index.html')
+        return render(request, 'kidney_app/index.html', context)
 
 def trackerPageView(request):
     return render(request, 'kidney_app/tracker.html')
@@ -90,4 +137,3 @@ def search_food(request):
     }
     
     return render(request, 'kidney_app/searchFood.html', context)            
-
