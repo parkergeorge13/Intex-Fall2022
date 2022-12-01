@@ -2,7 +2,6 @@ from django.shortcuts import render
 import requests, json
 from kidney_app.models import Food, Account, Nutrient
 from kidney_app.api import *
-from kidney_app.models import Food, Account, Nutrient
 
 # Create your views here.
 def landingPageView(request):
@@ -77,37 +76,43 @@ def trackerPageView(request):
     data = Nutrient.objects.all()
     context = {
         'nutrient': data,
-    }
-    return render(request, 'kidney_app/tracker.html', context)
-    context = {
         "meals" : ["Breakfast", "Lunch", "Dinner", "Snack", "Water"]
     }
     return render(request, 'kidney_app/tracker.html', context)
 
-def tracker_date_meal(request):
-    if request.method == 'POST':
-        mealName = request.POST.get('mealName')
-    context = {
-        'mealName': mealName
-    }
-    return render(request, 'kidney_app/displayFood.html', context)
-
 def displayFoodPageView(request):
     data = Food.objects.all()
+    # if request.method == 'POST':
+    #     mealName = request.POST.get('mealName')
+    #     mealDate = request.POST.get('mealDate')
     context = {
-        'food' : data
+        'food' : data,
+        # 'mealName': mealName,
+        # 'mealDate': mealDate
     } 
     return render(request, 'kidney_app/displayFood.html', context)
 
 def searchFoodPageView(request):
-    return render(request, 'kidney_app/searchFood.html')
+    serving = 1 
+    context = {
+        "serving": serving
+    }
+    return render(request, 'kidney_app/searchFood.html', context)
 
 def deleteFoodPageView(request, id) :
     data = Food.objects.get(id = id)
 
     data.delete()
 
-    return displayFoodPageView(request)
+    if request.method == 'POST':
+        mealName = request.POST.get('mealName')
+        mealDate = request.POST.get('mealDate')
+    context = {
+        'mealName': mealName,
+        'mealDate': mealDate
+    } 
+
+    return render(request, 'kidney_app/displayFood.html', context)
 
 def createFoodPageView(request):
     if request.method == 'POST':
@@ -119,6 +124,7 @@ def createFoodPageView(request):
         nutrient.protein = request.POST['nutrients_1']
         nutrient.potassium = request.POST['nutrients_2']
         nutrient.phosphorus = request.POST['nutrients_3']
+        nutrient.serving = request.POST['serving']
 
         food.save()
         nutrient.save()
@@ -151,9 +157,11 @@ def editSingleFoodPageView(request, id):
 def search_food(request):
     if request.method == 'POST':
         food = request.POST.get('search')
+        serving = request.POST.get('serving')
     context = {
         "food" : food,
-        'nutrients' : nutrition(food)
+        'nutrients' : nutrition(food),
+        "serving": serving
     }
     
-    return render(request, 'kidney_app/searchFood.html', context)            
+    return render(request, 'kidney_app/searchFood.html', context)   
