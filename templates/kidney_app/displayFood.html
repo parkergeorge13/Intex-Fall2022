@@ -16,7 +16,7 @@
         <div class="links">
             <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Log In</span>
             <button class="getStartedButton">                    
-                <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Get Started</span>
+                <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Tracker</span>
             </button>
         </div>
     </nav>
@@ -39,17 +39,41 @@
             </span>
         </div>
     </div>
+    <div>
+        Logging Food for {{mealName}}
+    </div>
 
     <h1><b>FOOD</b></h1>
+    <p id="alertMessage"></p>
     <div class='container'>
         {%for food in food %}
         <p>
-            <a class='btn btn-primary' href="{% url "deleteFood" id=food.id %}">Delete</a>
+            <a class='btn btn-primary' href="{% url 'deleteFood' id=food.id %}">Delete</a>
             {{food.food_desc }}
-            <a class='btn btn-primary' href="{% url "editSingleFood" id=food.id %}">Edit</a>
+            <a class='btn btn-primary' href="{% url 'editSingleFood' id=food.id %}">Edit</a>
         </p>
         {%endfor%}
     </div>
-    
+    <script>
+        if(sodiumLevel > 2300){
+            document.getElementById("alertMessage").innerHTML = "Your sodium level has exceeded the daily value!"
+            document.getElementById("alertMessage").style.visibility = visible
+        }
+
+        if(proteinLevel > 0.6 * kg) {
+            document.getElementById("alertMessage").innerHTML = "Your protein level has exceeded the daily value!"
+            document.getElementById("alertMessage").style.visibility = visible
+        }
+
+        if(potassiumLevel > 3000) {
+            document.getElementById("alertMessage").innerHTML = "Your potassium level has exceeded the daily value!"
+            document.getElementById("alertMessage").style.visibility = visible
+        }
+
+        if(phosphorusLevel > 1000) {
+            document.getElementById("alertMessage").innerHTML = "Your phosphorus level has exceeded the daily value!"
+            document.getElementById("alertMessage").style.visibility = visible
+        }
+    </script>
 </body>
 </html>
