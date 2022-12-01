@@ -66,8 +66,8 @@ def nutrition(food):
         for i in range(0, len(food_nutrients_dict[0])):
             sorted_nutrients = []
             for ii in range(0, len(food_nutrients_dict)):
-                sorted_nutrients.append(float(food_nutrients_dict[ii][i]))
-            food_nutrients_dict_sorted[i] = sorted(sorted_nutrients, key = float)
+                sorted_nutrients.append(int(food_nutrients_dict[ii][i]))
+            food_nutrients_dict_sorted[i] = sorted(sorted_nutrients, key = int)
 
         # Output the median of all nutrients into one final dictionary (median because data is skewed)
         median_nutrients = {}
