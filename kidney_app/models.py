@@ -14,17 +14,7 @@ class Account(models.Model):
     condition = models.CharField(max_length=25)
 
     def __str__(self):
-        return (self.full_name)
-
-    @property
-    def full_name(self):
-        return '%s %s' % (self.first_name, self.last_name)
-
-    def save(self):
-        self.first_name = self.first_name.upper()
-        self.last_name = self.last_name.upper()
-        super(Account, self).save()
-
+        return (self.username)
 class Journal_Entry(models.Model):
     date = models.DateField(default=datetime.today, blank=True)
     meal_category = models.CharField(max_length=25)
