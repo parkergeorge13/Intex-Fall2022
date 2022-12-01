@@ -23,7 +23,8 @@
     <img src="{%static 'img/herbs.jpg'%}" class="woodImage"></img>
     <div class="forms">
         <p class="signInP">Sign In</p>
-        <form class="signIn">
+        <form class="signIn" action="{% url 'sign_in' %}" method="post">
+            {% csrf_token %}
             <label for="username">User Name:</label>
             <br>
             <input type="text" id="username" name="username">
@@ -34,12 +35,17 @@
             <br>
             <br>
             <span onclick="transitionToPage(`{%url 'index'%}`)" >Create Account</span>
-        </form>
-        <br><br>
-        <button class="getStartedButton" type="submit">                    
-            <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Sign In</span>
-        </button>
+            <br><br>
+            <button class="getStartedButton" type="submit" value="submit">                    
+                Sign In
+            </button>
+        </form> 
     </div>
 
 </body>
+<script>
+    {% if duplicate == True %}
+        alert('The Username or Password you entered do not exist. \nPlease enter a correct Username and Password.');
+    {% endif %}
+</script>
 </html>

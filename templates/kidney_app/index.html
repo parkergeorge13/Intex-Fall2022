@@ -20,6 +20,7 @@
             </button>
         </div>
     </nav>
+    <h1>info:{{acc}}</h1>
     <div>
         <img src="{%static 'img/wood.jpg'%}" class="woodImage">
         <form class="forms" name="form" method="post" action="{% url 'index' %}">
@@ -85,3 +86,8 @@
             </button>-->
         </form>
 </body>
+<script>
+    {% if duplicate == True %}
+        alert('The Username you entered already exists. \nPlease try creating an account using a different Username');
+    {% endif %}
+</script>
