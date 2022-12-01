@@ -15,6 +15,6 @@ urlpatterns = [
     path("/deleteFood/<int:id>/" , deleteFoodPageView, name="deleteFood"),
     path("/editFood/" , editFoodPageView, name="editFood"),
     path("/displayFood/<int:id>/" , editSingleFoodPageView, name="editSingleFood"),
-    #path("showFoodNutrient/int:id/", showFoodNutrientPageView, name="showFoodNutrient"),
+    #path("showFoodNutrient", showFoodNutrientPageView, name="showFoodNutrient"),
     path("/displaywater/" , createWaterPageView, name="createWater"),
 ]
