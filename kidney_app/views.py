@@ -145,10 +145,16 @@ def displayFoodPageView(request):
     mealName = ''
     meal_date = ''
 
+    # if request.method == 'POST':
+    #     mealName = request.POST.get('mealName')
+    #     mealDate = request.POST.get('mealDate')
     context = {
         'food' : data,
         'mealName': mealName,
-        'meal_date' : meal_date
+        'meal_date' : meal_date,
+        'food' : data,
+        # 'mealName': mealName,
+        # 'mealDate': mealDate
     } 
 
     if request.method == 'POST':
@@ -159,14 +165,26 @@ def displayFoodPageView(request):
     return render(request, 'kidney_app/displayFood.html', context)
 
 def searchFoodPageView(request):
-    return render(request, 'kidney_app/searchFood.html')
+    serving = 1 
+    context = {
+        "serving": serving
+    }
+    return render(request, 'kidney_app/searchFood.html', context)
 
 def deleteFoodPageView(request, id) :
     data = Food.objects.get(id = id)
 
     data.delete()
 
-    return displayFoodPageView(request)
+    if request.method == 'POST':
+        mealName = request.POST.get('mealName')
+        mealDate = request.POST.get('mealDate')
+    context = {
+        'mealName': mealName,
+        'mealDate': mealDate
+    } 
+
+    return render(request, 'kidney_app/displayFood.html', context)
 
 def createFoodPageView(request):
     if request.method == 'POST':
@@ -176,6 +194,7 @@ def createFoodPageView(request):
         protein = request.POST['nutrients_1']
         potassium = request.POST['nutrients_2']
         phosphorus = request.POST['nutrients_3']
+        nutrient.serving = request.POST['serving']
 
         mealName = request.POST.get('mealName')
         # Get date in date format to put in database
@@ -231,13 +250,15 @@ def editSingleFoodPageView(request, id):
 def search_food(request):
     if request.method == 'POST':
         food = request.POST.get('search')
+        serving = request.POST.get('serving')
         mealName = request.POST.get('mealName')
         meal_date = request.POST.get('meal_date')
     context = {
         "food" : food,
         'nutrients' : nutrition(food),
+        "serving": serving,
         'mealName': mealName,
         'meal_date' : meal_date
     }
     
-    return render(request, 'kidney_app/searchFood.html', context)            
+    return render(request, 'kidney_app/searchFood.html', context)   

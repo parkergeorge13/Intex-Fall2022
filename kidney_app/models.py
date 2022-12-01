@@ -45,7 +45,22 @@ class Nutrient(models.Model):
     water = models.IntegerField(default=0)
     potassium = models.IntegerField(default=0)
     phosphorus = models.IntegerField(default=0)
+    servings = models.IntegerField(default=1)
     food = models.ManyToManyField(Food, blank=True)
 
     def __str__(self):
         return (self.food)
+    
+    @property
+    def Total_sodium(self):
+        total_sodium = self.sodium * self.servings
+        return total_sodium
+    def Total_protein(self):
+        total_protein = self.protein * self.servings
+        return total_protein
+    def Total_potassium(self):
+        total_potassium = self.potassium * self.servings
+        return total_potassium
+    def Total_phosphorus(self):
+        total_phosphorus = self.phosphorus * self.servings
+        return total_phosphorus
