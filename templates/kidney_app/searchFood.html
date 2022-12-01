@@ -1,4 +1,5 @@
 {%load static%}
+{%block content%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,12 +34,6 @@
                 <u>Search Food</u>
             </span>
         </div>
-        <div class="inline_block divider">|</div>
-        <div class="inline_block grey">
-            <span onclick="transitionToPage(`{%url 'createFood'%}`)" class="href">
-                Create New Food
-            </span>
-        </div>
     </div>
     <div class="searchBar">
         <form class="inline_block" action="{% url 'search_food' %}" method="post">
@@ -46,16 +41,72 @@
             <label for="searchFood">Search For Food:</label>
             <br>
             <input type="text" id="search" name="search" placeholder="search for food items">
-            <button class="getStartedButton" type="submit" value="submit">
+            <button class="getStartedButton" type="submit">
                 Search Food
             </button>
+            <br>
+            <br> 
         </form>
+        <form class="inline_block" action="{% url 'createFood' %}" method="post">
+            <button type="submit" class="getStartedButton inline_block"> 
+                Add Food to Journal                  
+            </button>
+        </form>   
+        {% comment %} <form class="inline_block" name="form" method="post" action="{% url 'createFood' %}">
+            {%csrf_token%}
+            <br>
+            <input type="text" name='food_desc' id='food_desc'  placeholder="Food Name" autofocus>
+            <button type="submit" class="getStartedButton inline_block">                    
+                <span onclick="transitionToPage(`{%url 'searchFood'%}`)" class="index">Create Food</span>
+            </button>
+        </form> {% endcomment %}
     </div>
     <div>
+<<<<<<< HEAD
+        <h2>Food Name: {{food}}</h2>
+        <h2>Sodium: {{nutrients.0}}</h2>
+        <h2>Protein: {{nutrients.1}}</h2>
+        <h2>Potassium: {{nutrients.2}}</h2>
+        <h2>Phosphorus: {{nutrients.3}}</h2>
+=======
         <h1>Sodium: {{nutrients.0}}</h1>
         <h1>Protein: {{nutrients.1}}gs</h1>
         <h1>Potassium: {{nutrients.2}}</h1>
         <h1>Phosphorus: {{nutrients.3}}</h1>
+>>>>>>> ae8833d8544fcc0aae5e44b09bc53a6e92af51ef
     </div>
+
+    <form class="forms" name="form" method="post" action="{% url 'createFood' %}">
+        {%csrf_token%}
+        <div class="inline_block">
+            <label for="food"></label>
+            <br>
+            <input type="hidden" value="{{food}}" id="food" name="food" autofocus>
+        </div>
+        <div class="inline_block">
+            <label for="nutrients_0"></label>
+            <br>
+            <input type="hidden" value="{{nutrients.0}}" id="nutrients_0" name="nutrients_0">
+        </div>
+        <div class="inline_block">
+            <label for="nutrients_1"></label>
+            <br>
+            <input type="hidden" value="{{nutrients.1}}" id="nutrients_1" name="nutrients_1">
+        </div>
+        <br>
+        <div class="inline_block">                            
+            <label for="nutrients_2"></label>
+            <br>
+            <input type="hidden" value="{{nutrients.2}}" id="nutrients_2" name="nutrients_2">
+        </div>
+        <br>
+        <div class="inline_block">
+            <label for="nutrients_3"></label>
+            <br>
+            <input type="hidden" value="{{nutrients.3}}" id="nutrients_3" name="nutrients_3">
+        </div>
+        
+        <button type="submit">Add Nutrients and food</button>
 </body>
 </html>
+{%endblock%}

@@ -1,7 +1,7 @@
 from django.shortcuts import render
+from kidney_app.models import Food, Account, Nutrient
 from kidney_app.api import *
 from kidney_app.models import Food, Account
-from django.contrib import messages
 
 # Create your views here.
 def landingPageView(request):
@@ -98,15 +98,21 @@ def deleteFoodPageView(request, id) :
 def createFoodPageView(request):
     if request.method == 'POST':
         food = Food()
+        nutrient = Nutrient()
 
-        food.food_desc = request.POST['food_desc']
+        food.food_desc = request.POST['food']
+        nutrient.sodium = request.POST['nutrients_0']
+        nutrient.protein = request.POST['nutrients_1']
+        nutrient.potassium = request.POST['nutrients_2']
+        nutrient.phosphorus = request.POST['nutrients_3']
 
         food.save()
+        nutrient.save()
 
         return displayFoodPageView(request)
         
     else :
-        return render(request, 'kidney_app/createFood.html')
+        return render(request, 'kidney_app/searchFood.html')
 
 def editFoodPageView(request) :
     if request.method == 'POST':

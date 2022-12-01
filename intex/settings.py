@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'intex',
         'USER': 'postgres',
         'PASSWORD': 'admin',
-        'HOST': 'localhost'
+        'HOST': 'localhost',
     }
 }
 
