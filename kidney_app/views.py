@@ -1,7 +1,12 @@
 from django.shortcuts import render
+<<<<<<< HEAD
 import requests, json
 
 from kidney_app.models import Food, Account, Nutrient
+=======
+from kidney_app.api import *
+from kidney_app.models import Food, Account
+>>>>>>> ae8833d8544fcc0aae5e44b09bc53a6e92af51ef
 
 # Create your views here.
 def landingPageView(request):
@@ -98,6 +103,7 @@ def search_food(request):
     
     return render(request, 'kidney_app/searchFood.html', context)            
 
+<<<<<<< HEAD
 def nutrition(food):
     try: 
         # initial install when running the api: pip install lxml html5lib beautifulsoup4 requests 
@@ -178,3 +184,5 @@ def nutrition(food):
     except Exception as e:
         print('\nUnable to connect to the vending API.')
         print(e)
+=======
+>>>>>>> ae8833d8544fcc0aae5e44b09bc53a6e92af51ef
