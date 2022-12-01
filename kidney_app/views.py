@@ -1,9 +1,16 @@
 from django.shortcuts import render
-import requests, json
 from kidney_app.models import Food, Account, Nutrient
 from kidney_app.api import *
 from kidney_app.models import Food, Account, Nutrient
+from django.db import connection
 
+# HOW TO EXECUTE A SQL STATEMENT
+# cursor = connection.cursor()
+# cursor.execute("SELECT * FROM kidney_app_food as f INNER JOIN kidney_app_nutrient as je ON f.id = je.id")
+# rows = cursor.fetchall()
+# print(rows)
+
+global_test = ''
 # Create your views here.
 def landingPageView(request):
     return render(request, 'kidney_app/landing.html')
@@ -27,6 +34,8 @@ def sign_in(request):
 
         # If there are duplicates
         if True in un_check:
+            global global_test 
+            global_test = username
             return trackerPageView(request)
         # If no duplicates
         else:
@@ -76,20 +85,31 @@ def trackerPageView(request):
     data = Nutrient.objects.all()
     context = {
         'nutrient': data,
-    }
-    return render(request, 'kidney_app/tracker.html', context)
-    context = {
-        "meals" : ["Breakfast", "Lunch", "Dinner", "Snack", "Water"]
+        "meals" : ["Breakfast", "Lunch", "Dinner", "Snack", "Water"],
+        'test' : global_test
     }
     return render(request, 'kidney_app/tracker.html', context)
 
 def tracker_date_meal(request):
     if request.method == 'POST':
         mealName = request.POST.get('mealName')
+        if mealName == 'Water':
+            return render(request, 'kidney_app/water.html')
     context = {
         'mealName': mealName
     }
     return render(request, 'kidney_app/displayFood.html', context)
+
+def createWaterPageView(request):
+    if request.method == 'POST':
+        amount = int(request.POST.get('amount'))
+
+        nutrient = Nutrient()
+        nutrient.water = amount
+
+        nutrient.save()
+
+    return render(request, 'kidney_app/displayFood.html')
 
 def displayFoodPageView(request):
     data = Food.objects.all()

@@ -29,7 +29,7 @@
         </div>
     </nav>
     <div class="home">
-        <form action="{% url 'displayFood' %}" method="post" class="dateLog">
+        <form action="{% url 'tracker_date_meal' %}" method="post" class="dateLog">
             {% csrf_token %}  
             <label for="meal_date">Select Date</label>
             <input type="date" id="meal_date" name="meal_date" min="1900-11-01" max="2022-11-30" onkeydown="return false">
