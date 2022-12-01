@@ -21,13 +21,11 @@ def sign_in(request):
         un_check = []
         pw_check = []
         for i in data:
-            if str(i) == username:
+            if str(i) == username + ' ' + password:
                 un_check.append(True)
-        for i in data:
-            if str(i) == password:
-                pw_check.append(True)
+
         # If there are duplicates
-        if True in un_check and True in pw_check:
+        if True in un_check:
             return trackerPageView(request)
         # If no duplicates
         else:
