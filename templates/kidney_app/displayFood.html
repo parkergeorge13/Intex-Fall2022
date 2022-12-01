@@ -28,15 +28,23 @@
         </div>
         <div class="inline_block divider">|</div>
         <div class="inline_block grey">
-            <span onclick="transitionToPage(`{%url 'searchFood'%}`)" class="href">
-                Search Food
-            </span>
+            <form action="{% url 'displayFood' %}" method="post" class="dateLog">
+                {% csrf_token %}  
+                <input type="hidden" id="meal_date" name="meal_date" value={{meal_date}}>
+                <input type="hidden" id="mealName" name="mealName" value={{mealName}}>
+                <button class="href" type="submit" value="submit">Search Food</button>
+            </form>
         </div>
     </div>
     <!-- <div>
         Logging Food for {{mealName}}, {{mealDate}}
     </div> -->
 
+    <div>
+        Logging Food for {{mealName}}
+        <br>
+        Date: {{meal_date}}
+    </div>
     <h1><b>FOOD</b></h1>
     <p id="alertMessage"></p>
     <div class='container'>

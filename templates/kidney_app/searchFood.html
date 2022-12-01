@@ -41,6 +41,8 @@
             <label for="searchFood">Search For Food:</label>
             <br>
             <input type="text" id="search" name="search" placeholder="search for food items">
+            <input type="hidden" id="meal_date" name="meal_date" value={{meal_date}}>
+            <input type="hidden" id="mealName" name="mealName" value={{mealName}}>
             <input class="serving" type="number" id="serving" name="serving" placeholder="number of servings" value=1>
 
             <button class="getStartedButton" type="submit">
@@ -48,6 +50,8 @@
             </button>
             <br>
             <br> 
+        </form> 
+        {% comment %} <form class="inline_block" name="form" method="post" action="{% url 'createFood' %}">
         </form>
         <br>
         <!-- <form class="inline_block" action="{% url 'search_food' %}" method="post">
@@ -106,8 +110,11 @@
             <br>
             <input type="hidden" id="nutrients_3" name="nutrients_3">
         </div>
+        <input type="hidden" id="meal_date" name="meal_date" value={{meal_date}}>
+        <input type="hidden" id="mealName" name="mealName" value={{mealName}}>
         <br> 
         <button type="submit">Add Nutrients and food</button>
+    </form>   
 </body>
 </html>
 {%endblock%}
