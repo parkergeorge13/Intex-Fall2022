@@ -24,7 +24,9 @@
     </nav>
     <form action="{% url 'createWater' %}" method="post" class="dateLog">
         {% csrf_token %}  
-        <label for="username">Cups of water:</label>
+        <label for="date">Date:</label>
+        <input type="text" id="date" name="date" value={{meal_date}} readonly>
+        <label for="amount">Cups of water:</label>
         <input type="text" id="amount" name="amount">
         <button class="getStartedButton" type="submit" value="submit">Enter</button>
     </form>

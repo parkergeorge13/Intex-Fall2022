@@ -41,17 +41,14 @@
             <label for="searchFood">Search For Food:</label>
             <br>
             <input type="text" id="search" name="search" placeholder="search for food items">
+            <input type="hidden" id="meal_date" name="meal_date" value={{meal_date}}>
+            <input type="hidden" id="mealName" name="mealName" value={{mealName}}>
             <button class="getStartedButton" type="submit">
                 Search Food
             </button>
             <br>
             <br> 
-        </form>
-        <form class="inline_block" action="{% url 'createFood' %}" method="post">
-            <button type="submit" class="getStartedButton inline_block"> 
-                Add Food to Journal                  
-            </button>
-        </form>   
+        </form> 
         {% comment %} <form class="inline_block" name="form" method="post" action="{% url 'createFood' %}">
             {%csrf_token%}
             <br>
@@ -98,8 +95,11 @@
             <br>
             <input type="hidden" value="{{nutrients.3}}" id="nutrients_3" name="nutrients_3">
         </div>
+        <input type="hidden" id="meal_date" name="meal_date" value={{meal_date}}>
+        <input type="hidden" id="mealName" name="mealName" value={{mealName}}>
         
         <button type="submit">Add Nutrients and food</button>
+    </form>   
 </body>
 </html>
 {%endblock%}

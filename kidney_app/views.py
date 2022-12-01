@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from kidney_app.models import Food, Account, Nutrient
+from kidney_app.models import Food, Account, Nutrient, Journal_Entry
 from kidney_app.api import *
-from kidney_app.models import Food, Account, Nutrient
 from django.db import connection
+import datetime as dt
 
 # HOW TO EXECUTE A SQL STATEMENT
 # cursor = connection.cursor()
@@ -10,7 +10,7 @@ from django.db import connection
 # rows = cursor.fetchall()
 # print(rows)
 
-global_test = ''
+acc_pk = 0
 # Create your views here.
 def landingPageView(request):
     return render(request, 'kidney_app/landing.html')
@@ -34,8 +34,13 @@ def sign_in(request):
 
         # If there are duplicates
         if True in un_check:
-            global global_test 
-            global_test = username
+            # get the user's pk id and store it in a global variable
+            cursor = connection.cursor()
+            cursor.execute(f"SELECT id FROM kidney_app_account AS a WHERE a.username = '{username}'")
+            rows = cursor.fetchone()
+            acc = rows[0]
+            global acc_pk 
+            acc_pk = acc
             return trackerPageView(request)
         # If no duplicates
         else:
@@ -86,36 +91,71 @@ def trackerPageView(request):
     context = {
         'nutrient': data,
         "meals" : ["Breakfast", "Lunch", "Dinner", "Snack", "Water"],
-        'test' : global_test
+        'test' : acc_pk
     }
     return render(request, 'kidney_app/tracker.html', context)
 
 def tracker_date_meal(request):
     if request.method == 'POST':
         mealName = request.POST.get('mealName')
+        meal_date = request.POST.get('meal_date')
+
+        context = {
+            'mealName': mealName,
+            'meal_date' : meal_date
+        }
+
         if mealName == 'Water':
-            return render(request, 'kidney_app/water.html')
-    context = {
-        'mealName': mealName
-    }
+            return render(request, 'kidney_app/water.html', context)
+
     return render(request, 'kidney_app/displayFood.html', context)
 
 def createWaterPageView(request):
     if request.method == 'POST':
         amount = int(request.POST.get('amount'))
+        # Get date in date format to put in database
+        date_raw = request.POST.get('date')
+        date_list = date_raw.split('-')
+        date_final = dt.datetime(int(date_list[0]), int(date_list[1]), int(date_list[2]))
 
-        nutrient = Nutrient()
-        nutrient.water = amount
+        #add to journal entry
+        account = Account.objects.get(pk=acc_pk)
+        d = Journal_Entry(date=date_final, meal_category = 'water')
+        d.account = account
+        d.save()
 
-        nutrient.save()
+        #add to food
+        a = Food(food_desc='water', )
+        a.save()
+        
+        #add to journal entry and food
+        a.journal_entry.add(d)
+
+        #add to nutrient
+        b = Nutrient(water=amount)
+        b.save()
+        
+        #combine food and nutrient id's 
+        b.food.add(a)
 
     return render(request, 'kidney_app/displayFood.html')
 
 def displayFoodPageView(request):
     data = Food.objects.all()
+    mealName = ''
+    meal_date = ''
+
     context = {
-        'food' : data
+        'food' : data,
+        'mealName': mealName,
+        'meal_date' : meal_date
     } 
+
+    if request.method == 'POST':
+        context['mealName'] = request.POST.get('mealName')
+        context['meal_date'] = request.POST.get('meal_date')
+        return render(request, 'kidney_app/searchFood.html', context)
+
     return render(request, 'kidney_app/displayFood.html', context)
 
 def searchFoodPageView(request):
@@ -130,17 +170,38 @@ def deleteFoodPageView(request, id) :
 
 def createFoodPageView(request):
     if request.method == 'POST':
-        food = Food()
-        nutrient = Nutrient()
+        
+        food_name = request.POST['food']
+        sodium = request.POST['nutrients_0']
+        protein = request.POST['nutrients_1']
+        potassium = request.POST['nutrients_2']
+        phosphorus = request.POST['nutrients_3']
 
-        food.food_desc = request.POST['food']
-        nutrient.sodium = request.POST['nutrients_0']
-        nutrient.protein = request.POST['nutrients_1']
-        nutrient.potassium = request.POST['nutrients_2']
-        nutrient.phosphorus = request.POST['nutrients_3']
+        mealName = request.POST.get('mealName')
+        # Get date in date format to put in database
+        date_raw = request.POST.get('meal_date')
+        date_list = date_raw.split('-')
+        date_final = dt.datetime(int(date_list[0]), int(date_list[1]), int(date_list[2]))
 
-        food.save()
-        nutrient.save()
+        #add to journal entry
+        account = Account.objects.get(pk=acc_pk)
+        d = Journal_Entry(date=date_final, meal_category = mealName)
+        d.account = account
+        d.save()
+
+        #add to food
+        a = Food(food_desc=food_name)
+        a.save()
+        
+        #add to journal entry and food
+        a.journal_entry.add(d)
+
+        #add to nutrient
+        b = Nutrient(sodium=sodium, protein=protein, potassium=potassium, phosphorus=phosphorus)
+        b.save()
+        
+        #combine food and nutrient id's 
+        b.food.add(a)
 
         return displayFoodPageView(request)
         
@@ -170,9 +231,13 @@ def editSingleFoodPageView(request, id):
 def search_food(request):
     if request.method == 'POST':
         food = request.POST.get('search')
+        mealName = request.POST.get('mealName')
+        meal_date = request.POST.get('meal_date')
     context = {
         "food" : food,
-        'nutrients' : nutrition(food)
+        'nutrients' : nutrition(food),
+        'mealName': mealName,
+        'meal_date' : meal_date
     }
     
     return render(request, 'kidney_app/searchFood.html', context)            
