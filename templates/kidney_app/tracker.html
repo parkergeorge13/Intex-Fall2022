@@ -12,6 +12,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 </head>
 <body>
+    <script>
+        function seeValue() {
+            dateValue = document.getElementById('riqi').value
+            document.getElementById('display').innerHTML = dateValue
+        }
+
+    </script>
     <nav class="navbar">
         <img src="{% static 'img/NKFLogo.svg'%}" onclick="transitionToPage(`{%url 'landing'%}`)"></img>
         <div class="links">
@@ -22,42 +29,29 @@
         </div>
     </nav>
     <div class="home">
-        <div class='buttonsContainer'>
-            <div>
-                <button type="submit" value="breakfast">
-                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Breakfast</span>
-                </Button>
-                <button type="submit" value='lunch' class ='smButton'>
-                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Lunch</span>
-                </button>
-                <button type="submit" class ='smButton' value="dinner">
-                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Dinner</span>
-                </button>
-            </div>
-            <div class="secondRow">
-                <button type="submit" class ='smButton' value="snack">
-                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Snack</span>
-                </button>
-                <button type="submit" class ='smButton' value="water">
-                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Water</span>
-                </button>
-            </div>
-        </div>
+        <form action="{% url 'tracker_date_meal' %}" method="post" class="dateLog">
+            {% csrf_token %}  
+            <label for="mealDate">Select Date</label>
+            <input type="date" id="mealDate" name="mealDate" min="1900-11-01" max="2022-11-30" onkeydown="return false">
+            <br><br>
+            <label for="mealName">Select Meal</label>
+            <select name="mealName" class="select" id="mealName">
+                {% for meal in meals %}
+                    <option value="{{ meal }}">{{ meal }}</option>
+                {% endfor %} 
+            </select>
+            <br><br>
+            <button class="getStartedButton" type="submit" value="submit" onclick=logDateMeal()>Comfirm Date and Meal</button>
+        </form>
+
+        <p id="display"></p>
         <div class="suggContainer">
             <p class="title">Suggestions: <a href="https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/eating-nutrition" target="blank">NIH Website</a></p>
             <div class="two">
                 <p>1. Choose foods with less salt and sodium to control blood pressure. </p>
-                <!-- <ul>
-                    <li>spices, herbs, sodium-free seasonings</li>
-                </ul> -->
                 <p>2. Careful with the amount of protein to eat</p>
-                <!-- <ul>
-                    <li>Animal Protein: Chicken, Fish, Meat, Eggs, Diary</li>
-                    <li>Plant Protein: Beans, Nuts, Grains</li>
-                </ul> -->
                 <p>3. Choose heart-healthy foods to keep fat from building up around heart, kidney, and blood vessels.</p>
                 <ul>
-                    <!-- <li>Lean meat, skinless poultry, fish, beans, vegetables, fruits, low-fat diary products</li> -->
                     <li>Limit alcohol</li>
                 </ul>
                 <p>4. Choose foods with less amount of Phospherous to help protect bones and blood vessels</p>
@@ -70,46 +64,12 @@
                 </ul>
             </div>
         </div>
-        <div>
-            <canvas id="myChart" width="20" height="20"></canvas>
-            <script>
-            const ctx = document.getElementById('myChart').getContext('2d');
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: [{% for data in nutrient %} '{{nutrient.food}}', {% endfor %}],
-                    datasets: [{
-                        label: 'Level of protein',
-                        data: [{% for data in nutrient %} {{nutrient.protein}}, {% endfor %}],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-            </script>
-        </div>
     </div>
+    <script>
+        function logDateMeal(){
+            mealDateValue = document.getElementById('mealDate').value
+            mealNameValue = document.getElementById('mealName').value
+        }
+    </script>
 </body>
 </html>

@@ -18,13 +18,13 @@
         <div class="links">
             <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Log In</span>
             <button class="getStartedButton">                    
-                <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Get Started</span>
+                <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText">Tracker</span>
             </button>
         </div>
     </nav>
     <div class="logBar">
         <div class="inline_block grey">
-            <span onclick="transitionToPage(`{%url 'displayFood'%}`)" class="href">
+            <span onclick="transitionToPage(`{%url 'displayFood'%}`)" class="href" mealDate=mealDate mealName=mealName>
                 Food Journal
             </span>
         </div>
@@ -41,36 +41,48 @@
             <label for="searchFood">Search For Food:</label>
             <br>
             <input type="text" id="search" name="search" placeholder="search for food items">
+            <input type="hidden" id="meal_date" name="meal_date" value={{meal_date}}>
+            <input type="hidden" id="mealName" name="mealName" value={{mealName}}>
+            <input class="serving" type="number" id="serving" name="serving" placeholder="number of servings" value=1>
+
             <button class="getStartedButton" type="submit">
                 Search Food
             </button>
             <br>
             <br> 
+        </form> 
+        {% comment %} <form class="inline_block" name="form" method="post" action="{% url 'createFood' %}">
         </form>
-        <form class="inline_block" action="{% url 'createFood' %}" method="post">
+        <br>
+        <!-- <form class="inline_block" action="{% url 'search_food' %}" method="post">
+            {% csrf_token %}
+            <input class="serving" type="number" id="serving" name="serving" placeholder="number of servings">
+            <button class="getStartedButton" type="submit">Submit Serving Size</button>
+        </form> -->
+        <!-- <form class="inline_block" action="{% url 'createFood' %}" method="post">
             <button type="submit" class="getStartedButton inline_block"> 
                 Add Food to Journal                  
             </button>
-        </form>   
-        {% comment %} <form class="inline_block" name="form" method="post" action="{% url 'createFood' %}">
+        </form>    -->
+        <!-- {% comment %} <form class="inline_block" name="form" method="post" action="{% url 'createFood' %}">
             {%csrf_token%}
             <br>
             <input type="text" name='food_desc' id='food_desc'  placeholder="Food Name" autofocus>
             <button type="submit" class="getStartedButton inline_block">                    
                 <span onclick="transitionToPage(`{%url 'searchFood'%}`)" class="index">Create Food</span>
             </button>
-        </form> {% endcomment %}
+        </form> {% endcomment %} -->
     </div>
     <div>
         <h2>Food Name: {{food}}</h2>
-        <h2>Sodium: {{nutrients.0}}</h2>
-        <h2>Protein: {{nutrients.1}}</h2>
-        <h2>Potassium: {{nutrients.2}}</h2>
-        <h2>Phosphorus: {{nutrients.3}}</h2>
+        <h2>Sodium: {% widthratio nutrients.0 1 serving %}</h2>
+        <h2>Protein: {% widthratio nutrients.1 1 serving %}</h2>
+        <h2>Potassium: {% widthratio nutrients.2 1 serving %}<h2>
+        <h2>Phosphorus: {% widthratio nutrients.3 1 serving %}</h2>
     </div>
 
-    <form class="forms" name="form" method="post" action="{% url 'createFood' %}">
-        {%csrf_token%}
+    <form class="forms" name="form" method="post" action="{% url 'displayFood' %}">
+        {% csrf_token %}
         <div class="inline_block">
             <label for="food"></label>
             <br>
@@ -96,10 +108,13 @@
         <div class="inline_block">
             <label for="nutrients_3"></label>
             <br>
-            <input type="hidden" value="{{nutrients.3}}" id="nutrients_3" name="nutrients_3">
+            <input type="hidden" id="nutrients_3" name="nutrients_3">
         </div>
-        
+        <input type="hidden" id="meal_date" name="meal_date" value={{meal_date}}>
+        <input type="hidden" id="mealName" name="mealName" value={{mealName}}>
+        <br> 
         <button type="submit">Add Nutrients and food</button>
+    </form>   
 </body>
 </html>
 {%endblock%}

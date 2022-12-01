@@ -131,6 +131,10 @@ span {
     text-decoration: none;
 }
 
+.getStartedButton:hover {
+    cursor: pointer;
+}
+
 .getStartedButton a{
     color: white;
     text-decoration: none;
@@ -177,6 +181,29 @@ span {
 }
 
 /* Tracker Page */ 
+.dateLog {
+    margin-left: calc(0.13 * 100vw);
+    margin-top: calc(0.03 * 100vh);
+
+}
+
+.dateLog input {
+    background-color: #FEF9F5;
+    border:none;
+    padding: 1rem;
+    border-radius: 15px;
+    z-index: 4;
+    width: 10%
+}
+
+.select {
+    background-color: #FEF9F5;
+    border:none;
+    padding: 1rem;
+    border-radius: 15px;
+    z-index: 4;
+    width: 10%
+}
 
 .mealButton {
     background-color: #F05E22;
@@ -185,7 +212,6 @@ span {
 .buttonsContainer {
     height: calc(0.4 * (100vh - 6rem));
     padding-left: calc(0.1 * (100vw - 6rem));
-    padding-top: calc(0.05 * (100vh - 6rem));
     margin-left: calc(0.01 * (100vw - 6rem));
 }
 
@@ -234,7 +260,7 @@ span {
     border: 1px solid black;
     width: 40%; 
     margin-left: calc(0.5 * 100vw);
-    margin-top: calc(-0.3 * 100vh);
+    margin-top: calc(-0.1 * 100vh);
     background-color: #FDF4EB;
     border-radius: 1.2rem;
     border:none;
@@ -277,6 +303,11 @@ span {
 .logBar .grey:hover {
     background-color: #FCE5CD;
     border-radius: 10rem;
+}
+
+.alertMessage {
+    color: red;
+    visibility: hidden;
 }
 
 /*Search Food Page */
