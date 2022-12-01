@@ -2,6 +2,7 @@ from django.shortcuts import render
 import requests, json
 from kidney_app.models import Food, Account, Nutrient
 from kidney_app.api import *
+from kidney_app.models import Food, Account, Nutrient
 
 # Create your views here.
 def landingPageView(request):
@@ -22,13 +23,11 @@ def sign_in(request):
         un_check = []
         pw_check = []
         for i in data:
-            if str(i) == username:
+            if str(i) == username + ' ' + password:
                 un_check.append(True)
-        for i in data:
-            if str(i) == password:
-                pw_check.append(True)
+
         # If there are duplicates
-        if True in un_check and True in pw_check:
+        if True in un_check:
             return trackerPageView(request)
         # If no duplicates
         else:
@@ -75,6 +74,11 @@ def indexPageView(request) :
         return render(request, 'kidney_app/index.html', context)
 
 def trackerPageView(request):
+    data = Nutrient.objects.all()
+    context = {
+        'nutrient': data,
+    }
+    return render(request, 'kidney_app/tracker.html', context)
     context = {
         "meals" : ["Breakfast", "Lunch", "Dinner", "Snack", "Water"]
     }
