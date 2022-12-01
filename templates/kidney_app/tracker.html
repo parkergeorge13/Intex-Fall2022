@@ -12,6 +12,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 </head>
 <body>
+    <script>
+        function seeValue() {
+            dateValue = document.getElementById('riqi').value
+            document.getElementById('display').innerHTML = dateValue
+        }
+
+    </script>
     <nav class="navbar">
         <img src="{% static 'img/NKFLogo.svg'%}" onclick="transitionToPage(`{%url 'landing'%}`)"></img>
         <div class="links">
@@ -22,27 +29,48 @@
         </div>
     </nav>
     <div class="home">
-        <div class='buttonsContainer'>
-            <div>
-                <button type="submit" value="breakfast">
-                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Breakfast</span>
-                </Button>
-                <button type="submit" value='lunch' class ='smButton'>
-                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Lunch</span>
-                </button>
-                <button type="submit" class ='smButton' value="dinner">
-                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Dinner</span>
-                </button>
-            </div>
-            <div class="secondRow">
-                <button type="submit" class ='smButton' value="snack">
-                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Snack</span>
-                </button>
-                <button type="submit" class ='smButton' value="water">
-                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)">Water</span>
-                </button>
-            </div>
-        </div>
+        <form action="{% url 'displayFood' %}" method="post" class="dateLog">
+            {% csrf_token %}  
+            <label for="meal_date">Select Date</label>
+            <input type="date" id="meal_date" name="meal_date" min="1900-11-01" max="2022-11-30" onkeydown="return false">
+            <br><br>
+            <label for="mealName">Select Meal</label>
+            <select name="mealName" class="select">
+                {% for meal in meals %}
+                    <option value="{{ meal }}">{{ meal }}</option>
+                {% endfor %} 
+            </select>
+            <br><br>
+            <button class="getStartedButton" type="submit" value="submit">Comfirm Date and Meal</button>
+        </form>
+        <!-- <form>
+            <input type="date" id="riqi" name="riqi" min="1900-11-01" max="2022-11-30" onkeydown="return false">
+            <button type="button" onclick="seeValue()">Submit</button>
+        </form> -->
+
+        <p id="display"></p>
+        <!-- <div class='buttonsContainer'>
+            <form action="{% url 'displayFood' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="breakfast" id="meal">
+                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)"></span>
+                </input>
+                <input type="submit" value='lunch' class ='smButton' id="meal">
+                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)" id="meal"></span>
+                </input>
+                <input type="submit" class ='smButton' value="dinner" id="meal">
+                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)" id="meal"></span>
+                </input>
+            </form>
+            <form action="" method="post" class="secondRow">
+                <input type="submit" class ='smButton' value="snack" id="meal">
+                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)" id="meal">Snack</span>
+                </input>
+                <input type="submit" class ='smButton' value="water" id="meal">
+                    <span onclick="transitionToPage(`{%url 'displayFood'%}`)" id="meal">Water</span>
+                </input>
+            </form>
+        </div> -->
         <div class="suggContainer">
             <p class="title">Suggestions: <a href="https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/eating-nutrition" target="blank">NIH Website</a></p>
             <div class="two">

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import requests, json
 from kidney_app.models import Food, Account, Nutrient
 from kidney_app.api import *
 from kidney_app.models import Food, Account, Nutrient
@@ -77,10 +78,21 @@ def trackerPageView(request):
         'nutrient': data,
     }
     return render(request, 'kidney_app/tracker.html', context)
+    context = {
+        "meals" : ["Breakfast", "Lunch", "Dinner", "Snack", "Water"]
+    }
+    return render(request, 'kidney_app/tracker.html', context)
+
+def tracker_date_meal(request):
+    if request.method == 'POST':
+        mealName = request.POST.get('mealName')
+    context = {
+        'mealName': mealName
+    }
+    return render(request, 'kidney_app/displayFood.html', context)
 
 def displayFoodPageView(request):
     data = Food.objects.all()
-
     context = {
         'food' : data
     } 
