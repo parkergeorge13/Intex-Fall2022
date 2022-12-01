@@ -99,10 +99,12 @@ def tracker_date_meal(request):
     if request.method == 'POST':
         mealName = request.POST.get('mealName')
         meal_date = request.POST.get('meal_date')
+        serving = 1
 
         context = {
             'mealName': mealName,
-            'meal_date' : meal_date
+            'meal_date' : meal_date,
+            'serving': serving
         }
 
         if mealName == 'Water':
@@ -144,6 +146,7 @@ def displayFoodPageView(request):
     data = Food.objects.all()
     mealName = ''
     meal_date = ''
+    serving = 1
 
     # if request.method == 'POST':
     #     mealName = request.POST.get('mealName')
@@ -153,6 +156,7 @@ def displayFoodPageView(request):
         'mealName': mealName,
         'meal_date' : meal_date,
         'food' : data,
+        'serving': serving
         # 'mealName': mealName,
         # 'mealDate': mealDate
     } 
@@ -194,7 +198,7 @@ def createFoodPageView(request):
         protein = request.POST['nutrients_1']
         potassium = request.POST['nutrients_2']
         phosphorus = request.POST['nutrients_3']
-        nutrient.serving = request.POST['serving']
+        serving = request.POST['serving']
 
         mealName = request.POST.get('mealName')
         # Get date in date format to put in database
@@ -216,7 +220,7 @@ def createFoodPageView(request):
         a.journal_entry.add(d)
 
         #add to nutrient
-        b = Nutrient(sodium=sodium, protein=protein, potassium=potassium, phosphorus=phosphorus)
+        b = Nutrient(sodium=sodium, protein=protein, potassium=potassium, phosphorus=phosphorus, serving = serving)
         b.save()
         
         #combine food and nutrient id's 
@@ -261,4 +265,7 @@ def search_food(request):
         'meal_date' : meal_date
     }
     
-    return render(request, 'kidney_app/searchFood.html', context)   
+    return render(request, 'kidney_app/searchFood.html', context)  
+
+def showFoodNutrientPageView(request):
+    return render(request, 'kidney_app/showFoodNutrient.html') 
