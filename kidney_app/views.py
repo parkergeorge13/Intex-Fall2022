@@ -145,3 +145,16 @@ def search_food(request):
     }
     
     return render(request, 'kidney_app/searchFood.html', context)            
+
+def showFoodNutrientPageView(request, id):
+    data1 = Food.objects.get(id = id)
+    data = Nutrient.objects.get(id = id)
+    food = data.food.all()
+
+    context = {
+        "nutrient" : data,
+        "food" : food,
+        "food" : data1
+    }
+
+    return render(request, 'kidney_app/showFoodNutrient.html', context)

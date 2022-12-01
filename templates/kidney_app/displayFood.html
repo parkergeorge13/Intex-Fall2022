@@ -39,12 +39,9 @@
         {%for food in food %}
         
         <p>
-            <a class='btn btn-primary' href="{% url "deleteFood" id=food.id %}">Delete</a>
+            <a class='btn btn-primary' href="{% url "showFoodNutrient" id=food.id %}">Food Nutrient</a>
             {{ food.food_desc }}
-            <p>Sodium: {{nutrient.sodium}}<p>
-            <p>Protein: {{nutrients.}}</p>
-            <p>Potassium: {{nutrients.2}}</p>
-            <p>Phosphorus: {{nutrients.3}}</p>
+            <a class='btn btn-primary' href="{% url "deleteFood" id=food.id %}">Delete</a>
             <a class='btn btn-primary' href="{% url "editSingleFood" id=food.id %}">Edit</a>
         </p>
         {%endfor%}
