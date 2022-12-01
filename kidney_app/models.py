@@ -14,7 +14,17 @@ class Account(models.Model):
     condition = models.CharField(max_length=25)
 
     def __str__(self):
-        return (self.username)
+        return (self.login)
+
+    @property
+    def login(self):
+        return '%s %s' % (self.username, self.password)
+
+    def save(self):
+        self.username = self.username
+        self.password = self.password
+        super(Account, self).save()
+
 class Journal_Entry(models.Model):
     date = models.DateField(default=datetime.today, blank=True)
     meal_category = models.CharField(max_length=25)
