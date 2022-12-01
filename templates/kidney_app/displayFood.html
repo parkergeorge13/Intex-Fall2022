@@ -30,8 +30,6 @@
         <div class="inline_block grey">
             <form action="{% url 'displayFood' %}" method="post" class="dateLog">
                 {% csrf_token %}  
-                <input type="hidden" id="meal_date" name="meal_date" value={{meal_date}}>
-                <input type="hidden" id="mealName" name="mealName" value={{mealName}}>
                 <button class="href" type="submit" value="submit">Search Food</button>
             </form>
         </div>

@@ -43,7 +43,7 @@
             <input type="text" id="search" name="search" placeholder="search for food items">
             <input type="hidden" id="meal_date" name="meal_date" value={{meal_date}}>
             <input type="hidden" id="mealName" name="mealName" value={{mealName}}>
-            <input class="serving" type="number" id="serving" name="serving" placeholder="number of servings" value=1>
+            <input class="servings" type="number" id="servings" name="servings" placeholder="number of servings" value=1>
 
             <button class="getStartedButton" type="submit">
                 Search Food
@@ -75,13 +75,13 @@
     </div>
     <div>
         <h2>Food Name: {{food}}</h2>
-        <h2>Sodium: {% widthratio nutrients.0 1 serving %}</h2>
-        <h2>Protein: {% widthratio nutrients.1 1 serving %}</h2>
-        <h2>Potassium: {% widthratio nutrients.2 1 serving %}<h2>
-        <h2>Phosphorus: {% widthratio nutrients.3 1 serving %}</h2>
+        <h2>Sodium: {% widthratio nutrients.0 1 servings %}</h2>
+        <h2>Protein: {% widthratio nutrients.1 1 servings %}</h2>
+        <h2>Potassium: {% widthratio nutrients.2 1 servings %}<h2>
+        <h2>Phosphorus: {% widthratio nutrients.3 1 servings %}</h2>
     </div>
 
-    <form class="forms" name="form" method="post" action="{% url 'displayFood' %}">
+    <form class="forms" name="form" method="post" action="{% url 'createFood' %}">
         {% csrf_token %}
         <div class="inline_block">
             <label for="food"></label>
@@ -108,10 +108,14 @@
         <div class="inline_block">
             <label for="nutrients_3"></label>
             <br>
-            <input type="hidden" id="nutrients_3" name="nutrients_3">
+            <input type="hidden" value="{{nutrients.3}}" id="nutrients_3" name="nutrients_3">
         </div>
-        <input type="hidden" id="meal_date" name="meal_date" value={{meal_date}}>
-        <input type="hidden" id="mealName" name="mealName" value={{mealName}}>
+        <br> 
+        <div class="inline_block">
+            <label for="servings"></label>
+            <br>
+            <input type="hidden" id="servings" name="servings" value={{servings}}>
+        </div>
         <br> 
         <button type="submit">Add Nutrients and food</button>
     </form>   

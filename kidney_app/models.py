@@ -31,7 +31,7 @@ class Journal_Entry(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
 
     def __str__(self):
-        return (self.food_desc)
+        return (self.date)
 
 class Food(models.Model):
     food_desc = models.CharField(max_length=25)

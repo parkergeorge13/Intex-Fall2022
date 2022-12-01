@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import indexPageView, trackerPageView, searchFoodPageView, createFoodPageView, landingPageView, displayFoodPageView, deleteFoodPageView, editFoodPageView, editSingleFoodPageView, search_food, sign_in, createWaterPageView, tracker_date_meal, showFoodNutrientPageView
+from .views import indexPageView, trackerPageView, searchFoodPageView, createFoodPageView, landingPageView, displayFoodPageView, deleteFoodPageView, editFoodPageView, editSingleFoodPageView, search_food, sign_in, createWaterPageView, tracker_date_meal
 from kidney_app import views
 
 urlpatterns = [
@@ -15,6 +15,6 @@ urlpatterns = [
     path("/deleteFood/<int:id>/" , deleteFoodPageView, name="deleteFood"),
     path("/editFood/" , editFoodPageView, name="editFood"),
     path("/displayFood/<int:id>/" , editSingleFoodPageView, name="editSingleFood"),
-    path("showFoodNutrient", showFoodNutrientPageView, name="showFoodNutrient"),
+    #path("showFoodNutrient", showFoodNutrientPageView, name="showFoodNutrient"),
     path("/displaywater/" , createWaterPageView, name="createWater"),
 ]
