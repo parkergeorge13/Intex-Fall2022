@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from kidney_app.models import Food, Account, Nutrient
 from kidney_app.api import *
+from kidney_app.models import Food, Account, Nutrient
 
 # Create your views here.
 def landingPageView(request):
@@ -72,7 +73,11 @@ def indexPageView(request) :
         return render(request, 'kidney_app/index.html', context)
 
 def trackerPageView(request):
-    return render(request, 'kidney_app/tracker.html')
+    data = Nutrient.objects.all()
+    context = {
+        'nutrient': data,
+    }
+    return render(request, 'kidney_app/tracker.html', context)
 
 def displayFoodPageView(request):
     data = Food.objects.all()
