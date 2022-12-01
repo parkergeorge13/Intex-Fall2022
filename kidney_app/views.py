@@ -144,6 +144,7 @@ def displayFoodPageView(request):
     data = Food.objects.all()
     mealName = ''
     meal_date = ''
+    serving=1
 
     # if request.method == 'POST':
     #     mealName = request.POST.get('mealName')
@@ -151,10 +152,8 @@ def displayFoodPageView(request):
     context = {
         'food' : data,
         'mealName': mealName,
-        'meal_date' : meal_date
-        'food' : data,
-        # 'mealName': mealName,
-        # 'mealDate': mealDate
+        'meal_date' : meal_date,
+        'serving': serving
     } 
 
     if request.method == 'POST':
@@ -166,8 +165,10 @@ def displayFoodPageView(request):
 
 def searchFoodPageView(request):
     serving = 1 
+    food = ''
     context = {
-        "serving": serving
+        "serving": serving,
+        "food": food
     }
     return render(request, 'kidney_app/searchFood.html', context)
 
@@ -176,15 +177,7 @@ def deleteFoodPageView(request, id) :
 
     data.delete()
 
-    if request.method == 'POST':
-        mealName = request.POST.get('mealName')
-        mealDate = request.POST.get('mealDate')
-    context = {
-        'mealName': mealName,
-        'mealDate': mealDate
-    } 
-
-    return render(request, 'kidney_app/displayFood.html', context)
+    return render(request, 'kidney_app/displayFood.html')
 
 def createFoodPageView(request):
     if request.method == 'POST':
