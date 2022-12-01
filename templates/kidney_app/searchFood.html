@@ -51,27 +51,9 @@
             <br>
             <br> 
         </form> 
-        {% comment %} <form class="inline_block" name="form" method="post" action="{% url 'createFood' %}">
+         <!-- <form class="inline_block" name="form" method="post" action="{% url 'createFood' %}"> -->
         </form>
         <br>
-        <!-- <form class="inline_block" action="{% url 'search_food' %}" method="post">
-            {% csrf_token %}
-            <input class="serving" type="number" id="serving" name="serving" placeholder="number of servings">
-            <button class="getStartedButton" type="submit">Submit Serving Size</button>
-        </form> -->
-        <!-- <form class="inline_block" action="{% url 'createFood' %}" method="post">
-            <button type="submit" class="getStartedButton inline_block"> 
-                Add Food to Journal                  
-            </button>
-        </form>    -->
-        <!-- {% comment %} <form class="inline_block" name="form" method="post" action="{% url 'createFood' %}">
-            {%csrf_token%}
-            <br>
-            <input type="text" name='food_desc' id='food_desc'  placeholder="Food Name" autofocus>
-            <button type="submit" class="getStartedButton inline_block">                    
-                <span onclick="transitionToPage(`{%url 'searchFood'%}`)" class="index">Create Food</span>
-            </button>
-        </form> {% endcomment %}
     </div>
     <div>
         <h2>Food Name: {{food}}</h2>
