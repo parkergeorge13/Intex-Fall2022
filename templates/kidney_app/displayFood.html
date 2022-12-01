@@ -30,11 +30,7 @@
         <div class="inline_block grey">
             <form action="{% url 'displayFood' %}" method="post" class="dateLog">
                 {% csrf_token %}  
-                <input type="hidden" id="meal_date" name="meal_date" value={{meal_date}}>
-                <input type="hidden" id="mealName" name="mealName" value={{mealName}}>
-                <span>
-                    <button class="href" type="submit" value="submit" onclick="transitionToPage(`{%url 'displayFood'%}`)" class="href">Search Food</button>
-                </span>
+                <button class="href" type="submit" value="submit">Search Food</button>
             </form>
         </div>
     </div>
@@ -48,13 +44,10 @@
     <div class='container'>
         {%for food in food %}
         <p>
+            {% comment %} <a class='btn btn-primary' href="{% url "showFoodNutrient" id=food.id %}">Food Nutrient</a> {% endcomment %}
             {{ food.food_desc }}
-            <p>Sodium: {{nutrient.0}}<p>
-            <p>Protein: {{nutrients.1}}</p>
-            <p>Potassium: {{nutrients.2}}</p>
-            <p>Phosphorus: {{nutrients.3}}</p>
-            <a class='btn btn-primary' href="{% url 'editSingleFood' id=food.id %}">Edit</a>
-            <a class='btn btn-primary' href="{% url 'deleteFood' id=food.id %}">Delete</a>
+            <a class='btn btn-primary' href="{% url "deleteFood" id=food.id %}">Delete</a>
+            <a class='btn btn-primary' href="{% url "editSingleFood" id=food.id %}">Edit</a>
         </p>
         {%endfor%}
     </div>
