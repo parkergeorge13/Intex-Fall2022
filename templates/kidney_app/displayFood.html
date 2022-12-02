@@ -50,6 +50,7 @@
         <input type="hidden" id="totalPhosphorus" name="totalPhosphorus" value="{{totalPhosphorus}}">
         <input type="hidden" id="weightValue" name="weightValue" value="{{weightValue}}">
     </form>
+    <p>{{weightValue}}</p>
     <h1 class="foodJournalTitle"><b>Food Journal</b></h1>
     <br>
     <div class="graphs">
@@ -70,9 +71,9 @@
             {%for food in food %}
             <tr>
                 <th class="bigHead">{{ food.food_desc }}</th>
-                <th class="left"><a class='btn btn-primary' href="{% url "showFoodNutrientSingle" id=food.id %}"><img src="{% static 'img/nutrition.png' %}"></a></th>
-                <th class="left"><a class='btn btn-primary' href="{% url "editSingleFood" id=food.id %}"><img src="{% static 'img/editing.png' %}"></a></th>
-                <th class="left"><a class='btn btn-primary' href="{% url "deleteFood" id=food.id %}"><img src="{% static 'img/delete.png' %}"></a></th>
+                <th class="left"><a class='btn btn-primary' href="{% url 'showFoodNutrientSingle' id=food.id %}"><img src="{% static 'img/nutrition.png' %}"></a></th>
+                <th class="left"><a class='btn btn-primary' href="{% url 'editSingleFood' id=food.id %}"><img src="{% static 'img/editing.png' %}"></a></th>
+                <th class="left"><a class='btn btn-primary' href="{% url 'deleteFood' id=food.id %}"><img src="{% static 'img/delete.png' %}"></a></th>
             </tr>
             {%endfor%}
         </table>
@@ -84,8 +85,7 @@
         potassiumLevel = document.getElementById('totalPotassium').value
         phosphorusLevel = document.getElementById('totalPhosphorus').value
         weightValue = document.getElementById('weightValue').value
-        weightValue = weightValue * 0.6
-        document.getElementById('weight').innerHTML = weightValue
+        proteinDV = weightValue * 0.6
 
         alertMessage = ''
 
@@ -94,7 +94,7 @@
             alertMessage = alertMessage + "Your sodium level has exceeded the daily value! \n"
             }
 
-            if(proteinLevel > weightValue ) {
+            if(proteinLevel > proteinDV) {
                 alertMessage = alertMessage +  "Your protein level has exceeded the daily value! \n"
             }
 

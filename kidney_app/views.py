@@ -181,7 +181,7 @@ def displayFoodPageView(request):
         'food' : data,
         'mealName': glo_meal,
         'meal_date' : glo_date,
-        'servings': servings,
+        'servings': servings,      
     } 
 
     return render(request, 'kidney_app/displayFood.html', context)
@@ -325,15 +325,48 @@ def editFoodPageView(request) :
 
         food.save()
 
-        return searchFoodDisplayPageView(request)
+    return searchFoodDisplayPageView(request)
 
 def editSingleFoodPageView(request, id):
     data = Food.objects.get(id = id)
-
+    food = data
     context = {
-        'food' : data
+        'food' : data,
+        'nutrients' : nutrition(food),
     } 
     return render(request, 'kidney_app/editFood.html', context)
+
+def displayFoodAfterEdit(request):
+    if request.method == 'POST':
+        mealName = request.POST.get('mealName')
+        mealDate = request.POST.get('mealDate')
+
+        context = {
+            'mealName': mealName,
+            'meal_date' : mealDate
+        }
+        global glo_date 
+        glo_date = mealDate
+        global glo_meal
+        glo_meal = mealName
+
+        if mealName == 'Water':
+            return render(request, 'kidney_app/water.html', context)
+    showGraph(glo_date)
+    
+    data = Food.objects.filter(journal_entry__date = glo_date, journal_entry__account_id = acc_pk)
+
+    servings=1
+
+    context = {
+        'food' : data,
+        'mealName': glo_meal,
+        'meal_date' : glo_date,
+        'servings': servings,      
+    } 
+
+    return render(request, 'kidney_app/displayFood.html', context)
+
 
 def search_food(request):
     if request.method == 'POST':
