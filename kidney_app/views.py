@@ -212,7 +212,40 @@ def createFoodPageView(request):
         #combine food and nutrient id's 
         b.food.add(a)
 
-        return render(request, 'kidney_app/displayFood.html')
+        date = glo_date
+
+        # sodium
+        cursor = connection.cursor()
+        cursor.execute(f"SELECT SUM(nutrient.sodium)as sodium FROM kidney_app_food food JOIN kidney_app_nutrient_food as nf ON nf.food_id = food.id JOIN kidney_app_nutrient as nutrient ON nf.nutrient_id = nutrient.id JOIN kidney_app_food_journal_entry as fje ON fje.food_id = food.id JOIN kidney_app_journal_entry as journal ON fje.journal_entry_id = journal.id GROUP BY journal.date HAVING journal.date = '{date}';")
+        sodium = cursor.fetchone()
+        totalSodium = sodium[0]
+
+        # protein
+        cursor = connection.cursor()
+        cursor.execute(f"SELECT SUM(nutrient.protein)as protein FROM kidney_app_food food JOIN kidney_app_nutrient_food as nf ON nf.food_id = food.id JOIN kidney_app_nutrient as nutrient ON nf.nutrient_id = nutrient.id JOIN kidney_app_food_journal_entry as fje ON fje.food_id = food.id JOIN kidney_app_journal_entry as journal ON fje.journal_entry_id = journal.id GROUP BY journal.date HAVING journal.date = '{date}';")
+        protein = cursor.fetchone()
+        totalProtein = protein[0]
+
+        # potassium
+        cursor = connection.cursor()
+        cursor.execute(f"SELECT SUM(nutrient.potassium)as potassium FROM kidney_app_food food JOIN kidney_app_nutrient_food as nf ON nf.food_id = food.id JOIN kidney_app_nutrient as nutrient ON nf.nutrient_id = nutrient.id JOIN kidney_app_food_journal_entry as fje ON fje.food_id = food.id JOIN kidney_app_journal_entry as journal ON fje.journal_entry_id = journal.id GROUP BY journal.date HAVING journal.date = '{date}';")
+        potassium = cursor.fetchone()
+        totalPotassium = potassium[0]
+
+        # phophorus
+        cursor = connection.cursor()
+        cursor.execute(f"SELECT SUM(nutrient.phosphorus)as phosphorus FROM kidney_app_food food JOIN kidney_app_nutrient_food as nf ON nf.food_id = food.id JOIN kidney_app_nutrient as nutrient ON nf.nutrient_id = nutrient.id JOIN kidney_app_food_journal_entry as fje ON fje.food_id = food.id JOIN kidney_app_journal_entry as journal ON fje.journal_entry_id = journal.id GROUP BY journal.date HAVING journal.date = '{date}';")
+        phophorus = cursor.fetchone()
+        totalPhosphorus = phophorus[0]
+        
+        context = {
+            'totalSodium': totalSodium,
+            'totalProtein': totalProtein,
+            'totalPotassium': totalPotassium,
+            'totalPhosphorus': totalPhosphorus,
+        }
+
+        return render(request, 'kidney_app/displayFood.html', context)
         
     else :
         return render(request, 'kidney_app/searchFood.html')
