@@ -90,7 +90,9 @@ def indexPageView(request) :
 
 def trackerPageView(request):
     data = Nutrient.objects.all()
+    data = Food.objects.all()
     context = {
+        'food': data,
         'nutrient': data,
         "meals" : ["Breakfast", "Lunch", "Dinner", "Snack", "Water"],
     }
@@ -162,10 +164,12 @@ def displayFoodPageView(request):
 
 def searchFoodPageView(request):
     servings = 1 
+    leveltype = "Actual"
     context = {
         "servings": servings,
         'meal_date' : glo_date,
-        'mealName' : glo_meal
+        'mealName' : glo_meal,
+        'leveltype' : leveltype
     }
     return render(request, 'kidney_app/searchFood.html', context)
 
@@ -185,6 +189,7 @@ def createFoodPageView(request):
         potassium = request.POST['nutrients_2']
         phosphorus = request.POST['nutrients_3']
         servings = request.POST['servings']
+        leveltype = request.POST['leveltype']
 
         mealName = glo_meal
         # Get date in date format to put in database
@@ -206,7 +211,7 @@ def createFoodPageView(request):
         a.journal_entry.add(d)
 
         #add to nutrient
-        b = Nutrient(sodium=sodium, protein=protein, potassium=potassium, phosphorus=phosphorus, servings = servings)
+        b = Nutrient(sodium=sodium, protein=protein, potassium=potassium, phosphorus=phosphorus,leveltype=leveltype, servings = servings)
         b.save()
         
         #combine food and nutrient id's 
@@ -284,7 +289,106 @@ def search_food(request):
         'meal_date' : meal_date
     }
     
-    return render(request, 'kidney_app/searchFood.html', context)            
+    return render(request, 'kidney_app/searchFood.html', context)     
+
+
+#connecting to postgres
+#sodium df
+import psycopg2 as pg2
+import pandas as pd
+
+conn = pg2.connect(database='intex',
+                   user='postgres',
+                   password='admin')
+cur = conn.cursor()
+
+cur.execute('''SELECT 'sodium' AS nutrienttype, SUM(n.sodium) AS nutrientlevel, n.leveltype
+FROM kidney_app_nutrient as n 
+INNER JOIN kidney_app_food as f ON f.id = n.id
+INNER JOIN kidney_app_journal_entry as je ON je.id = n.id
+GROUP BY je.date, n.leveltype''')
+data = cur.fetchall()
+
+cols = []
+for elt in cur.description:
+    cols.append(elt[0])
+    
+act_sodium_df = pd.DataFrame(data=data,columns=cols)
+
+#potassium df
+conn = pg2.connect(database='intex',
+                   user='postgres',
+                   password='admin')
+cur = conn.cursor()
+
+cur.execute('''SELECT 'potassium' AS nutrienttype, SUM(n.potassium) AS nutrientlevel, n.leveltype
+FROM kidney_app_nutrient as n 
+INNER JOIN kidney_app_food as f ON f.id = n.id
+INNER JOIN kidney_app_journal_entry as je ON je.id = n.id
+GROUP BY je.date, n.leveltype''')
+data = cur.fetchall()
+
+cols = []
+for elt in cur.description:
+    cols.append(elt[0])
+    
+act_potassium_df = pd.DataFrame(data=data,columns=cols)
+
+#phosphorus df
+conn = pg2.connect(database='intex',
+                   user='postgres',
+                   password='admin')
+cur = conn.cursor()
+
+cur.execute('''SELECT 'phosphorus' AS nutrienttype, SUM(n.phosphorus) AS nutrientlevel, n.leveltype
+FROM kidney_app_nutrient as n 
+INNER JOIN kidney_app_food as f ON f.id = n.id
+INNER JOIN kidney_app_journal_entry as je ON je.id = n.id
+GROUP BY je.date, n.leveltype''')
+data = cur.fetchall()
+
+cols = []
+for elt in cur.description:
+    cols.append(elt[0])
+    
+act_phosphorus_df = pd.DataFrame(data=data,columns=cols)
+
+#protein df
+conn = pg2.connect(database='intex',
+                   user='postgres',
+                   password='admin')
+cur = conn.cursor()
+
+cur.execute('''SELECT 'protein' AS nutrienttype, SUM(n.protein) AS nutrientlevel, n.leveltype
+FROM kidney_app_nutrient as n 
+INNER JOIN kidney_app_food as f ON f.id = n.id
+INNER JOIN kidney_app_journal_entry as je ON je.id = n.id
+GROUP BY je.date, n.leveltype''')
+data = cur.fetchall()
+
+cols = []
+for elt in cur.description:
+    cols.append(elt[0])
+    
+act_protein_df = pd.DataFrame(data=data,columns=cols)
+
+#water df
+conn = pg2.connect(database='intex',
+                   user='postgres',
+                   password='admin')
+cur = conn.cursor()
+
+cur.execute('''SELECT 'water' AS nutrienttype, SUM(n.water) AS nutrientlevel, n.leveltype
+FROM kidney_app_nutrient as n 
+INNER JOIN kidney_app_food as f ON f.id = n.id
+INNER JOIN kidney_app_journal_entry as je ON je.id = n.id
+GROUP BY je.date, n.leveltype''')
+data = cur.fetchall()
+
+cols = []
+for elt in cur.description:
+    cols.append(elt[0])
+    
 
 def showFoodNutrientPageView(request):
     if request.method == 'POST':
@@ -311,3 +415,101 @@ def showFoodNutrientSingle(request, id):
         'food' : data
     } 
     return render(request, 'kidney_app/showFoodNutrient.html', context)
+act_water_df = pd.DataFrame(data=data,columns=cols)
+
+# postgres graph test
+# import numpy as np
+# import pandas as pd
+# import matplotlib.pyplot as plt
+# import seaborn as sns
+
+# sns.barplot(x = 'nutrienttype', y = 'nutrientlevel', hue = 'leveltype', data = potassium_df)
+
+# plt.title('Postgres Test')
+# plt.savefig('static/img/test.jpg')
+# plt.savefig('intex/static/img/test.jpg')
+
+# nutrientList3 = ['Water']
+
+
+#creating a dataframe for suggested values
+#micro df
+data=[['sodium', 1898, 'suggested'], ['potassium', 2750, 'suggested'], ['phosphorus', 900, 'suggested']]
+
+suggested_micro_df = pd.DataFrame(data, 
+                  index=[1, 2, 3], 
+                  columns=['nutrienttype', 'nutrientlevel', 'leveltype'])
+
+suggested_micro_df.index.names = ['NutrientID']
+suggested_micro_df
+
+#macro df
+data=[['protein', 0.6, 'suggested']]
+
+suggested_macro_df = pd.DataFrame(data, 
+                  index=[1], 
+                  columns=['nutrienttype', 'nutrientlevel', 'leveltype'])
+
+suggested_macro_df.index.names = ['NutrientID']
+suggested_macro_df
+
+#water df
+data=[['water', 3700, 'suggested']]
+
+suggested_water_df = pd.DataFrame(data, 
+                  index=[1], 
+                  columns=['nutrienttype', 'nutrientlevel', 'leveltype'])
+
+suggested_water_df.index.names = ['NutrientID']
+suggested_water_df
+
+#concat dfs
+microframes = [act_sodium_df, act_potassium_df, act_phosphorus_df, suggested_micro_df]
+microResult = pd.concat(microframes)
+
+macroframes = [act_protein_df, suggested_macro_df]
+macroResult = pd.concat(macroframes)
+
+waterframes = [act_water_df, suggested_water_df]
+waterResult = pd.concat(waterframes)
+
+#generating graphs
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# nutrientList1 = ['sodium', 'potassium', 'phosphorus']
+
+# micro_df = microResult[(microResult['nutrienttype'].isin(nutrientList1))]
+
+# we will have a "nutrient type" column that has each of the 5 nutrient names
+# we will have a "nutrient level" column that has an integer of the amount of that nutrient
+# we will have a "level type" column that specifies whether that row is a "suggested" level from the database or a recording of their "actual" level
+sns.barplot(x = 'nutrienttype', y = 'nutrientlevel', hue = 'leveltype', data = microResult)
+
+plt.title('Daily Micronutrients (miligrams)')
+plt.savefig('static/img/micro.jpg')
+plt.savefig('intex/static/img/micro.jpg')
+
+nutrientList2 = ['protein']
+
+macro_df = macroResult[(macroResult['nutrienttype'].isin(nutrientList2))]
+
+sns.barplot(x = 'nutrienttype', y = 'nutrientlevel', data = macroResult)
+
+plt.title('Daily Macronutrients (grams)')
+plt.savefig('static/img/macro.jpg')
+plt.savefig('intex/static/img/macro.jpg')
+
+nutrientList3 = ['water']
+
+water_df = waterResult[(waterResult['nutrienttype'].isin(nutrientList3))]
+
+sns.barplot(x = 'nutrienttype', y = 'nutrientlevel', data = waterResult)
+
+plt.title('Daily Water Intake (mililiters)')
+plt.savefig('static/img/water.jpg')
+plt.savefig('intex/static/img/water.jpg')
+
+

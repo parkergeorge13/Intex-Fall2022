@@ -57,16 +57,16 @@
         </p>
         {%endfor%}
     </div>
-    <script>
-        sodiumLevel = document.getElementById("totalSodium").value 
-        proteinLevel = document.getElementById("totalProtein").value 
-        potassiumLevel = document.getElementById("totalPotassium").value 
-        phosphorusLevel = document.getElementById("totalPhosphorus").value 
-
-        if(sodiumLevel > 2300){
-            document.getElementById("alertMessage").innerHTML = "Your sodium level has exceeded the daily value!"
-            document.getElementById("alertMessage").style.visibility = visible
-        }
+    <div>
+        <img src="{% static 'img/micro.jpg'%}"></img>
+        <img src="{% static 'img/macro.jpg'%}"></img>
+        <img src="{% static 'img/water.jpg'%}"></img>
+    </div>
+    <!-- <script>
+        // if(sodiumLevel > 2300){
+        //     document.getElementById("alertMessage").innerHTML = "Your sodium level has exceeded the daily value!"
+        //     document.getElementById("alertMessage").style.visibility = visible
+        // }
 
         if(proteinLevel > 0.6 * kg) {
             document.getElementById("alertMessage").innerHTML = "Your protein level has exceeded the daily value!"
