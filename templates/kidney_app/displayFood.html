@@ -28,7 +28,7 @@
         </div>
         <div class="inline_block divider">|</div>
         <div class="inline_block grey">
-            <form action="{% url 'displayFood' %}" method="post" class="dateLog">
+            <form action="{% url 'searchFood' %}" method="post" class="dateLog">
                 {% csrf_token %}  
                 <button class="href" type="submit" value="submit">Search Food</button>
             </form>
@@ -39,17 +39,28 @@
         <br>
         Date: {{meal_date}}
     </div>
-    <h1><b>FOOD</b></h1>
+    <form>
+        <input type="hidden" id="totalSodium" name="totalSodium" value="{{totalSodium}}">
+        <input type="hidden" id="totalProtein" name="totalProtein" value="{{totalProtein}}">
+        <input type="hidden" id="totalPotassium" name="totalPotassium" value="{{totalPotassium}}">
+        <input type="hidden" id="totalPhosphorus" name="totalPhosphorus" value="{{totalPhosphorus}}">
+    </form>
     <p id="alertMessage"></p>
+    <h1><b>FOOD</b></h1>
     <div class='container'>
         {%for food in food %}
         <p>
             {{ food.food_desc }}
+            <a class='btn btn-primary' href="{% url "showFoodNutrientSingle" id=food.id %}">Food Nutrient</a>
             <a class='btn btn-primary' href="{% url "deleteFood" id=food.id %}">Delete</a>
             <a class='btn btn-primary' href="{% url "editSingleFood" id=food.id %}">Edit</a>
-            <a class='btn btn-primary' href="{% url "showFoodNutrientSingle" id=food.id%}">Food Nutrient</a>
         </p>
         {%endfor%}
+    </div>
+    <div>
+        <img src="{% static 'img/micro.jpg'%}"></img>
+        <img src="{% static 'img/macro.jpg'%}"></img>
+        <img src="{% static 'img/water.jpg'%}"></img>
     </div>
     <!-- <script>
         // if(sodiumLevel > 2300){
@@ -57,20 +68,20 @@
         //     document.getElementById("alertMessage").style.visibility = visible
         // }
 
-        // if(proteinLevel > 0.6 * kg) {
-        //     document.getElementById("alertMessage").innerHTML = "Your protein level has exceeded the daily value!"
-        //     document.getElementById("alertMessage").style.visibility = visible
-        // }
+        if(proteinLevel > 0.6 * kg) {
+            document.getElementById("alertMessage").innerHTML = "Your protein level has exceeded the daily value!"
+            document.getElementById("alertMessage").style.visibility = visible
+        }
 
-        // if(potassiumLevel > 3000) {
-        //     document.getElementById("alertMessage").innerHTML = "Your potassium level has exceeded the daily value!"
-        //     document.getElementById("alertMessage").style.visibility = visible
-        // }
+        if(potassiumLevel > 3000) {
+            document.getElementById("alertMessage").innerHTML = "Your potassium level has exceeded the daily value!"
+            document.getElementById("alertMessage").style.visibility = visible
+        }
 
-        // if(phosphorusLevel > 1000) {
-        //     document.getElementById("alertMessage").innerHTML = "Your phosphorus level has exceeded the daily value!"
-        //     document.getElementById("alertMessage").style.visibility = visible
-        // }
-    </script> -->
+        if(phosphorusLevel > 1000) {
+            document.getElementById("alertMessage").innerHTML = "Your phosphorus level has exceeded the daily value!"
+            document.getElementById("alertMessage").style.visibility = visible
+        }
+    </script>
 </body>
 </html>

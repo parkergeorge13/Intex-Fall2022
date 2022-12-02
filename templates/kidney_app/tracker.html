@@ -29,7 +29,7 @@
         </div>
     </nav>
     <div class="home">
-        <form action="{% url 'tracker_date_meal' %}" method="post" class="dateLog">
+        <form action="{% url 'displayFood' %}" method="post" class="dateLog">
             {% csrf_token %}  
             <label for="mealDate">Select Date</label>
             <input type="date" id="mealDate" name="mealDate" min="1900-11-01" max="2022-11-30" onkeydown="return false">
@@ -64,12 +64,47 @@
                 </ul>
             </div>
         </div>
-    </div>
-    <script>
-        function logDateMeal(){
-            mealDateValue = document.getElementById('mealDate').value
-            mealNameValue = document.getElementById('mealName').value
-        }
-    </script>
+       
+        {% comment %} <div>
+            <canvas id="myChart" width="20" height="20"></canvas>
+            <script>
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [{% for data in food %} '{{food.food_desc}}', {% endfor %}],
+                    datasets: [{
+                        label: 'Level of protein',
+                        data: [{% for data in nutrient %} {{nutrient.protein}}, {% endfor %}],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            </script>
+        </div>
+    </div> {% endcomment %}
 </body>
 </html>
