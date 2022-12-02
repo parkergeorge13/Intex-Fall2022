@@ -163,7 +163,7 @@ def displayFoodPageView(request):
         if mealName == 'Water':
             return render(request, 'kidney_app/water.html', context)
     
-    data = Food.objects.filter(journal_entry__date = glo_date)
+    data = Food.objects.filter(journal_entry__date = glo_date, journal_entry__account_id = acc_pk)
     print(data)
 
     servings=1
@@ -189,7 +189,7 @@ def searchFoodPageView(request):
     return render(request, 'kidney_app/searchFood.html', context)
 
 def searchFoodDisplayPageView(request): 
-    data = Food.objects.filter(journal_entry__date = glo_date)
+    data = Food.objects.filter(journal_entry__date = glo_date, journal_entry__account_id = acc_pk)
     print(data)
 
     servings=1
