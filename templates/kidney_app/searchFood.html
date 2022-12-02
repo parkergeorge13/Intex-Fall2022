@@ -51,7 +51,6 @@
             <br>
             <br> 
         </form> 
-         <!-- <form class="inline_block" name="form" method="post" action="{% url 'createFood' %}"> -->
         </form>
         <br>
     </div>
@@ -73,30 +72,36 @@
         <div class="inline_block">
             <label for="nutrients_0"></label>
             <br>
-            <input type="hidden" value="{{nutrients.0}}" id="nutrients_0" name="nutrients_0">
+            <input type="hidden" value="{% widthratio nutrients.0 1 servings %}" id="nutrients_0" name="nutrients_0">
         </div>
         <div class="inline_block">
             <label for="nutrients_1"></label>
             <br>
-            <input type="hidden" value="{{nutrients.1}}" id="nutrients_1" name="nutrients_1">
+            <input type="hidden" value="{% widthratio nutrients.1 1 servings %}" id="nutrients_1" name="nutrients_1">
         </div>
         <br>
         <div class="inline_block">                            
             <label for="nutrients_2"></label>
             <br>
-            <input type="hidden" value="{{nutrients.2}}" id="nutrients_2" name="nutrients_2">
+            <input type="hidden" value="{% widthratio nutrients.2 1 servings %}" id="nutrients_2" name="nutrients_2">
         </div>
         <br>
         <div class="inline_block">
             <label for="nutrients_3"></label>
             <br>
-            <input type="hidden" value="{{nutrients.3}}" id="nutrients_3" name="nutrients_3">
+            <input type="hidden" value="{% widthratio nutrients.3 1 servings %}" id="nutrients_3" name="nutrients_3">
         </div>
         <br> 
         <div class="inline_block">
             <label for="servings"></label>
             <br>
             <input type="hidden" id="servings" name="servings" value={{servings}}>
+        </div>
+        <br> 
+        <div class="inline_block">
+            <label for="leveltype"></label>
+            <br>
+            <input type="hidden" id="leveltype" name="leveltype" value="Actual">
         </div>
         <br> 
         <button type="submit">Add Nutrients and food</button>

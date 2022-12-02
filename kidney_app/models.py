@@ -46,6 +46,7 @@ class Nutrient(models.Model):
     potassium = models.IntegerField(default=0)
     phosphorus = models.IntegerField(default=0)
     servings = models.IntegerField(default=1)
+    leveltype = models.CharField( default='Actual', max_length=25)
     food = models.ManyToManyField(Food, blank=True)
 
     def __str__(self):
