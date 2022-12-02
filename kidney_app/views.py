@@ -425,9 +425,12 @@ def showGraph(date):
 
     cur.execute(f'''SELECT 'potassium' AS nutrienttype, SUM(n.potassium) AS nutrientlevel, n.leveltype
     FROM kidney_app_nutrient as n 
-    INNER JOIN kidney_app_food as f ON f.id = n.id
-    INNER JOIN kidney_app_journal_entry as je ON je.id = n.id
-    WHERE date = '{date}' GROUP BY je.date, n.leveltype''')
+	INNER JOIN kidney_app_nutrient_food as nf on n.id = nf.nutrient_id
+    INNER JOIN kidney_app_food as f ON nf.food_id = f.id
+	INNER JOIN kidney_app_food_journal_entry as fje ON f.id = fje.food_id
+    INNER JOIN kidney_app_journal_entry as je ON je.id = fje.journal_entry_id
+    WHERE date = '{date}' 
+	GROUP BY je.date, n.leveltype''')
     data = cur.fetchall()
 
     cols = []
@@ -445,9 +448,12 @@ def showGraph(date):
 
     cur.execute(f'''SELECT 'phosphorus' AS nutrienttype, SUM(n.phosphorus) AS nutrientlevel, n.leveltype
     FROM kidney_app_nutrient as n 
-    INNER JOIN kidney_app_food as f ON f.id = n.id
-    INNER JOIN kidney_app_journal_entry as je ON je.id = n.id
-    WHERE date = '{date}' GROUP BY je.date, n.leveltype''')
+	INNER JOIN kidney_app_nutrient_food as nf on n.id = nf.nutrient_id
+    INNER JOIN kidney_app_food as f ON nf.food_id = f.id
+	INNER JOIN kidney_app_food_journal_entry as fje ON f.id = fje.food_id
+    INNER JOIN kidney_app_journal_entry as je ON je.id = fje.journal_entry_id
+    WHERE date = '{date}' 
+    GROUP BY je.date, n.leveltype''')
     data = cur.fetchall()
 
     cols = []
@@ -465,8 +471,10 @@ def showGraph(date):
 
     cur.execute(f'''SELECT 'protein' AS nutrienttype, SUM(n.protein) AS nutrientlevel, n.leveltype
     FROM kidney_app_nutrient as n 
-    INNER JOIN kidney_app_food as f ON f.id = n.id
-    INNER JOIN kidney_app_journal_entry as je ON je.id = n.id
+	INNER JOIN kidney_app_nutrient_food as nf on n.id = nf.nutrient_id
+    INNER JOIN kidney_app_food as f ON nf.food_id = f.id
+	INNER JOIN kidney_app_food_journal_entry as fje ON f.id = fje.food_id
+    INNER JOIN kidney_app_journal_entry as je ON je.id = fje.journal_entry_id
     WHERE date = '{date}'
     GROUP BY je.date, n.leveltype''')
     data = cur.fetchall()
@@ -486,8 +494,10 @@ def showGraph(date):
 
     cur.execute(f'''SELECT 'water' AS nutrienttype, SUM(n.water) AS nutrientlevel, n.leveltype
     FROM kidney_app_nutrient as n 
-    INNER JOIN kidney_app_food as f ON f.id = n.id
-    INNER JOIN kidney_app_journal_entry as je ON je.id = n.id
+	INNER JOIN kidney_app_nutrient_food as nf on n.id = nf.nutrient_id
+    INNER JOIN kidney_app_food as f ON nf.food_id = f.id
+	INNER JOIN kidney_app_food_journal_entry as fje ON f.id = fje.food_id
+    INNER JOIN kidney_app_journal_entry as je ON je.id = fje.journal_entry_id
     WHERE date = '{date}'
     GROUP BY je.date, n.leveltype''')
     data = cur.fetchall()
