@@ -288,7 +288,7 @@ def createFoodPageView(request):
         totalphosphorus = phophorus[0]
 
         cursor = connection.cursor()
-        cursor.execute(f"SELECT weight from kidney_app_account where id = '{acc_pk}';")
+        cursor.execute(f"SELECT weight from kidney_app_account;")
         weight = cursor.fetchone()
         weightvalue = weight[0]
 

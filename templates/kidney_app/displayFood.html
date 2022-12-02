@@ -84,6 +84,8 @@
         potassiumLevel = document.getElementById('totalPotassium').value
         phosphorusLevel = document.getElementById('totalPhosphorus').value
         weightValue = document.getElementById('weightValue').value
+        weightValue = weightValue * 0.6
+        document.getElementById('weight').innerHTML = weightValue
 
         alertMessage = ''
 
@@ -92,7 +94,7 @@
             alertMessage = alertMessage + "Your sodium level has exceeded the daily value! \n"
             }
 
-            if(proteinLevel > 0.6 * weightValue) {
+            if(proteinLevel > weightValue ) {
                 alertMessage = alertMessage +  "Your protein level has exceeded the daily value! \n"
             }
 
