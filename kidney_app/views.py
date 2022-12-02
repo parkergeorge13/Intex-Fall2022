@@ -173,7 +173,6 @@ def displayFoodPageView(request):
     showGraph(glo_date)
     
     data = Food.objects.filter(journal_entry__date = glo_date, journal_entry__account_id = acc_pk)
-    print(data)
 
     servings=1
 
@@ -199,7 +198,6 @@ def searchFoodPageView(request):
 
 def searchFoodDisplayPageView(request): 
     data = Food.objects.filter(journal_entry__date = glo_date, journal_entry__account_id = acc_pk)
-    print(data)
 
     servings=1
 
