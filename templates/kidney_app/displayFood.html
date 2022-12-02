@@ -37,10 +37,11 @@
             </span>
         </div>
     </div>
-    <div>
-        Logging Food for {{mealName}}
+    <br>
+    <div class="logFood">
+        Logging Food for <span class="orange">{{mealName}}</span>
         <br>
-        Date: {{meal_date}}
+        Date: <span class="orange">{{meal_date}}</span>
     </div>
     <form>
         <input type="hidden" id="totalSodium" name="totalSodium" value="{{totalSodium}}">
@@ -49,21 +50,33 @@
         <input type="hidden" id="totalPhosphorus" name="totalPhosphorus" value="{{totalPhosphorus}}">
         <input type="hidden" id="weightValue" name="weightValue" value="{{weighValue}}">
     </form>
-    <h1><b>FOOD</b></h1>
-    <div class='container'>
-        {%for food in food %}
-        <p>
-            {{ food.food_desc }}
-            <a class='btn btn-primary' href="{% url "showFoodNutrientSingle" id=food.id %}">Food Nutrient</a>
-            <a class='btn btn-primary' href="{% url "deleteFood" id=food.id %}">Delete</a>
-            <a class='btn btn-primary' href="{% url "editSingleFood" id=food.id %}">Edit</a>
-        </p>
-        {%endfor%}
+    <h1 class="foodJournalTitle"><b>Food Journal</b></h1>
+    <br>
+    <div class="graphs">
+        <img class="one" src="{% static 'img/micro.jpg'%}"></img>
+        <br>
+        <img class="one" src="{% static 'img/macro.jpg'%}"></img>
+        <br>
+        <img class="one" src="{% static 'img/water.jpg'%}"></img>
     </div>
-    <div>
-        <img src="{% static 'img/micro.jpg'%}"></img>
-        <img src="{% static 'img/macro.jpg'%}"></img>
-        <img src="{% static 'img/water.jpg'%}"></img>
+    <div class='displayFood'>
+        <table>
+            <tr>
+                <th class="bigHead" >Food Name</th>
+                <th class="left">Nutrient</th>
+                <th class="left">Edit</th>
+                <th class="left">Delete</th>
+            </tr>
+            {%for food in food %}
+            <tr>
+                <th class="bigHead">{{ food.food_desc }}</th>
+                <th class="left"><a class='btn btn-primary' href="{% url "showFoodNutrientSingle" id=food.id %}"><img src="{% static 'img/nutrition.png' %}"></a></th>
+                <th class="left"><a class='btn btn-primary' href="{% url "editSingleFood" id=food.id %}"><img src="{% static 'img/editing.png' %}"></a></th>
+                <th class="left"><a class='btn btn-primary' href="{% url "deleteFood" id=food.id %}"><img src="{% static 'img/delete.png' %}"></a></th>
+            </tr>
+            {%endfor%}
+        </table>
+        <br><br>
     </div>
     <script>
         sodiumLevel = document.getElementById('totalSodium').value
@@ -93,9 +106,6 @@
 
             alert(alertMessage)
         }
-
-
-        // document.getElementById("alertMessage").innerHTML = alertMessage
     </script>
 </body>
 </html>

@@ -7,6 +7,7 @@ import datetime as dt
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+plt.switch_backend('agg')
 import seaborn as sns
 import psycopg2 as pg2
 import pandas as pd

@@ -10,7 +10,7 @@ body {
     height: 100vh;
     --navbar-height: 7rem;
     background-color: #FBEBDB;
-    overflow: hidden;
+    overflow: auto;
     opacity: 0;
     transition: opacity .5s;
 }
@@ -50,6 +50,10 @@ span {
     z-index: 0;
 }
 
+.forms {
+    margin-left: calc(0.5 * 100vw);
+    margin-top: calc(-0.73 * 100vh)
+}
 
 .signInP{
     font-size: 40px;
@@ -62,13 +66,14 @@ span {
     border-radius: 15px;
     z-index: 4;
     width: 40%
+    
 }
 
 .signIn input{
     padding-bottom: 3px;
 }
 
-.signIn span {
+.signIn .span {
     font-size:12px;
     text-decoration: underline;
 }
@@ -131,6 +136,10 @@ span {
     text-decoration: none;
 }
 
+.getStartedButton:hover {
+    cursor: pointer;
+}
+
 .getStartedButton a{
     color: white;
     text-decoration: none;
@@ -177,6 +186,33 @@ span {
 }
 
 /* Tracker Page */ 
+.dateLog {
+    margin-left: calc(0.18 * 100vw);
+    margin-top: calc(0.13 * 100vh);
+
+}
+
+.dateLog input {
+    background-color: #FEF9F5;
+    border:none;
+    padding: 1rem;
+    border-radius: 15px;
+    z-index: 4;
+    width: 10%;
+}
+
+.dateLog label {
+    margin-right: calc(0.005 * 100vw)
+}
+
+.select {
+    background-color: #FEF9F5;
+    border:none;
+    padding: 1rem;
+    border-radius: 15px;
+    z-index: 4;
+    width: 10%
+}
 
 .mealButton {
     background-color: #F05E22;
@@ -185,7 +221,6 @@ span {
 .buttonsContainer {
     height: calc(0.4 * (100vh - 6rem));
     padding-left: calc(0.1 * (100vw - 6rem));
-    padding-top: calc(0.05 * (100vh - 6rem));
     margin-left: calc(0.01 * (100vw - 6rem));
 }
 
@@ -198,7 +233,6 @@ span {
     box-shadow: 2px 2px 5px #F8C997;
     transition-duration: 0.5s;
     font-size: 20px;
-    /* margin: 5rem 3rem -1rem 0.4rem; */
     margin-top: calc(0.1 * (100vh - 6rem));
     margin-right: calc(0.05 * (100vw - 6rem));
 
@@ -234,18 +268,13 @@ span {
     border: 1px solid black;
     width: 40%; 
     margin-left: calc(0.5 * 100vw);
-    margin-top: calc(-0.3 * 100vh);
+    margin-top: calc(-0.27 * 100vh);
     background-color: #FDF4EB;
     border-radius: 1.2rem;
     border:none;
 }
 
-.suggContainer a{
-    text-decoration: none;
-    color: grey;
-}
-
-.title {
+.title{
     padding: 1.9rem 0rem 1.5rem 1rem;
     border-bottom: 1px solid black;
     font-size: 17px;
@@ -282,6 +311,11 @@ span {
 .logBar .grey:hover {
     background-color: #FCE5CD;
     border-radius: 10rem;
+}
+
+.alertMessage {
+    color: red;
+    visibility: hidden;
 }
 
 /*Search Food Page */
@@ -323,14 +357,119 @@ span {
 /* Edit Food Page */
 
 .editBar {
-    margin-top: calc(100vh * 0.07);
-    margin-left: calc(100vw * 0.35);
+    margin: 0 auto;
+    width: 120%;
+    padding-top: calc(100vh * 0.07);
+    padding-left: calc(100vw * 0.42);
+}
+
+.editBar label {
+    text-align: center;
 }
 
 .editBar input {
     background-color: #FEF9F5;
     border:none;
+    margin-right: calc(100vw * 0.02);
     padding: 1rem;
     border-radius: 15px;
     width: 7%;
+}
+
+/* Show Nutritient Page */
+.foodNutrient table, th, td {
+    border: 1px solid #C1C1C1;
+    border-collapse: separate !important;
+    text-align: center;
+    background-color: #FCEEDF;
+}
+
+.foodNutrient .bordered {
+    border: solid #ccc 1px;
+    -moz-border-radius: 40px;
+    -webkit-border-radius: 40px;
+    border-radius: 40px;
+    -webkit-box-shadow: 0 1px 1px #F4CCCC;
+    -moz-box-shadow: 0 1px 1px #F4CCCC;
+    box-shadow: 0 1px 1px #F4CCCC;
+}
+
+.foodNutrient tr:nth-child(even) {
+    background-color: #F9CB9C;
+  }
+
+.foodNutrient .bordered tr:last-child td:last-child {
+    -moz-border-radius: 0 0 40px 0;
+    -webkit-border-radius: 0 0 40px 0;
+    border-radius: 0 0 40px 0;
+} 
+.foodNutrient .bordered th:first-child {
+    -moz-border-radius: 40px 0 0 0;
+    -webkit-border-radius: 40px 0 0 0;
+    border-radius: 40px 0 0 0;
+}
+.foodNutrient .bordered th:last-child {
+    -moz-border-radius: 0 40px 0 0;
+    -webkit-border-radius: 0 40px 0 0;
+    border-radius: 0 40px 0 0;
+}
+.foodNutrient .bordered th:only-child{
+    -moz-border-radius: 40px 40px 0 0;
+    -webkit-border-radius: 40px 40px 0 0;
+    border-radius: 40px 40px 0 0;
+}
+.foodNutrient .bordered tr:last-child td:first-child {
+    -moz-border-radius: 0 0 0 40px;
+    -webkit-border-radius: 0 0 0 40px;
+    border-radius: 0 0 0 40px;
+}
+
+/* Display Food Page */
+.logFood {
+    margin-left: calc(0.1 * 100vw)
+}
+
+.foodJournalTitle {
+    margin: 0 auto;
+    width: 15%;
+}
+
+.displayFood {
+    margin: 0 auto;
+}
+
+.displayFood table, th, td {
+    /* border: 1px solid #C1C1C1;
+    border-collapse: separate !important; */
+    border: none;
+    text-align: center;
+    background-color: #FCEEDF;
+    width: calc(0.4 * 100vw);
+    height: calc(0.06 * 100vh);
+    margin-left: calc(0.1 * 100vw)
+}
+
+.displayFood img {
+    width: calc(0.017 * 100vw);
+}
+
+.bigHead {
+    width: calc(3 * 100vw);
+    padding-right:calc(0.06 * 100vw)
+}
+
+.left {
+    text-align: left;
+}
+
+.orange {
+    color:#F05E22
+}
+
+.one {
+    margin-left: calc(0.7 * 100vw);
+    /* margin-top: calc(-0.8 * 100vh); */
+    display: inline;
+    text-align: right;
+    height: calc(0.1 * 100vh);
 }

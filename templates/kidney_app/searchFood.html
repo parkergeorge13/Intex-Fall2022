@@ -38,13 +38,16 @@
     <div class="searchBar">
         <form class="inline_block" action="{% url 'search_food' %}" method="post">
             {% csrf_token %}
-            <label for="searchFood">Search For Food:</label>
-            <br>
-            <input type="text" id="search" name="search" placeholder="search for food items">
-            <input type="hidden" id="meal_date" name="meal_date" value={{meal_date}}>
-            <input type="hidden" id="mealName" name="mealName" value={{mealName}}>
-            <input class="servings" type="number" id="servings" name="servings" placeholder="number of servings" value=1>
-
+            <div class="inline_block">
+                <label for="searchFood">Search For Food:</label>
+                <input type="text" id="search" name="search" placeholder="search for food items">
+                <input type="hidden" id="meal_date" name="meal_date" value={{meal_date}}>
+                <input type="hidden" id="mealName" name="mealName" value={{mealName}}>
+            </div>
+            <div class="inline_block">
+                <label for="servings">Number of Servings: </label>
+                <input class="servings" type="number" id="servings" name="servings" placeholder="number of servings" value=1>
+            </div>
             <button class="getStartedButton" type="submit">
                 Search Food
             </button>
@@ -54,41 +57,37 @@
         </form>
         <br>
     </div>
-    <div>
-        <h2>Food Name: {{food}}</h2>
-        <h2>Sodium: {% widthratio nutrients.0 1 servings %}</h2>
-        <h2>Protein: {% widthratio nutrients.1 1 servings %}</h2>
-        <h2>Potassium: {% widthratio nutrients.2 1 servings %}<h2>
-        <h2>Phosphorus: {% widthratio nutrients.3 1 servings %}</h2>
+    <div class="searchFoodTable">
+        <table>
+            <tr>
+                <th>Food Name</th>
+                <th>{{food}}</th>
+            </tr>
+            <tr>
+                <th>Sodium</th>
+                <th>{% widthratio nutrients.0 1 servings %}</th>
+            </tr>
+            <tr>
+                <th>Protein</th>
+                <th>{% widthratio nutrients.1 1 servings %}</th>
+            </tr>
+            <tr>
+                <th>Potassium</th>
+                <th>{% widthratio nutrients.2 1 servings %}</th>
+            </tr>
+            <tr>
+                <th>Phosphorus</th>
+                <th>{% widthratio nutrients.3 1 servings %}</th>
+            </tr>
+        </table>
     </div>
-
-    <form class="forms" name="form" method="post" action="{% url 'createFood' %}">
+    <br>
+    <form name="form" method="post" action="{% url 'createFood' %}">
         {% csrf_token %}
-        <div class="inline_block">
-            <label for="food"></label>
-            <br>
             <input type="hidden" value="{{food}}" id="food" name="food" autofocus>
-        </div>
-        <div class="inline_block">
-            <label for="nutrients_0"></label>
-            <br>
             <input type="hidden" value="{% widthratio nutrients.0 1 servings %}" id="nutrients_0" name="nutrients_0">
-        </div>
-        <div class="inline_block">
-            <label for="nutrients_1"></label>
-            <br>
-            <input type="hidden" value="{% widthratio nutrients.1 1 servings %}" id="nutrients_1" name="nutrients_1">
-        </div>
-        <br>
-        <div class="inline_block">                            
-            <label for="nutrients_2"></label>
-            <br>
+            <input type="hidden" value="{% widthratio nutrients.1 1 servings %}" id="nutrients_1" name="nutrients_1">                          
             <input type="hidden" value="{% widthratio nutrients.2 1 servings %}" id="nutrients_2" name="nutrients_2">
-        </div>
-        <br>
-        <div class="inline_block">
-            <label for="nutrients_3"></label>
-            <br>
             <input type="hidden" value="{% widthratio nutrients.3 1 servings %}" id="nutrients_3" name="nutrients_3">
         </div>
         <br> 
@@ -104,7 +103,7 @@
             <input type="hidden" id="leveltype" name="leveltype" value="Actual">
         </div>
         <br> 
-        <button type="submit">Add Nutrients and food</button>
+        <button type="submit" class="getStartedButton addButton">Add Nutrients and food</button>
     </form>   
 </body>
 </html>
