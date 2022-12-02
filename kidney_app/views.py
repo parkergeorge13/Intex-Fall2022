@@ -285,3 +285,29 @@ def search_food(request):
     }
     
     return render(request, 'kidney_app/searchFood.html', context)            
+
+def showFoodNutrientPageView(request):
+    if request.method == 'POST':
+        id = request.POST['id']
+
+        food = Food.objects.get(id=id)
+
+        food.food_desc = request.POST['food_desc']
+
+        food.save()
+
+        return render(request, 'kidney_app/displayFood.html')
+
+    # cursor = connection.cursor()
+    # cursor.execute("SELECT * FROM kidney_app_food as f INNER JOIN kidney_app_nutrient as je ON f.id = je.id")
+    # rows = cursor.fetchall()
+    # print(rows)
+    # return render(request, 'kidney_app/showFoodNutrient.html')
+
+def showFoodNutrientSingle(request, id):
+    data = Food.objects.get(id = id)
+
+    context = {
+        'food' : data
+    } 
+    return render(request, 'kidney_app/showFoodNutrient.html', context)
