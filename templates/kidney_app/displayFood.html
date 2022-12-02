@@ -28,7 +28,7 @@
         </div>
         <div class="inline_block divider">|</div>
         <div class="inline_block grey">
-            <form action="{% url 'displayFood' %}" method="post" class="dateLog">
+            <form action="{% url 'searchFood' %}" method="post" class="dateLog">
                 {% csrf_token %}  
                 <button class="href" type="submit" value="submit">Search Food</button>
             </form>
@@ -45,9 +45,9 @@
         {%for food in food %}
         <p>
             {{ food.food_desc }}
+            <a class='btn btn-primary' href="{% url "showFoodNutrientSingle" id=food.id %}">Food Nutrient</a>
             <a class='btn btn-primary' href="{% url "deleteFood" id=food.id %}">Delete</a>
             <a class='btn btn-primary' href="{% url "editSingleFood" id=food.id %}">Edit</a>
-            <a class='btn btn-primary' href="{% url "showFoodNutrientSingle" id=food.id%}">Food Nutrient</a>
         </p>
         {%endfor%}
     </div>

@@ -1,13 +1,12 @@
 {%load static%}
 {%block content%}
-<h2>Nutrients for {{food.food}}</h2>
+<h2>Nutrients for {{food}}</h2>
 <br>
-{%for data in nutrient%}
-<p>{{nutrient.sodium}}</p>
-<p>{{nutrient.1}}</p>
-<p>{{nutrient.2}}</p>
-<p>{{nutrient.3}}</p>
-{%endfor%}
+<p>Sodium: {{sodium}}</p>
+<p>Protein: {{protein}}</p>
+<p>Potassium: {{potassium}}</p>
+<p>Phospherous: {{phosphorus}}</p>
+<p>Servings: {{servings}}</p>
 <br>
 <br>
 {%endblock%}
