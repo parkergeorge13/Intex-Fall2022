@@ -31,10 +31,10 @@
     <div class="home">
         <form action="{% url 'displayFood' %}" method="post" class="dateLog">
             {% csrf_token %}  
-            <label for="mealDate">Select Date</label>
+            <label for="mealDate">Select Date </label>
             <input type="date" id="mealDate" name="mealDate" min="1900-11-01" max="2022-11-30" onkeydown="return false">
             <br><br>
-            <label for="mealName">Select Meal</label>
+            <label for="mealName">Select Meal </label>
             <select name="mealName" class="select" id="mealName">
                 {% for meal in meals %}
                     <option value="{{ meal }}">{{ meal }}</option>

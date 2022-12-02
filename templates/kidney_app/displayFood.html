@@ -28,10 +28,13 @@
         </div>
         <div class="inline_block divider">|</div>
         <div class="inline_block grey">
-            <form action="{% url 'searchFood' %}" method="post" class="dateLog">
+            <!-- <form action="{% url 'searchFood' %}" method="post" class="dateLog">
                 {% csrf_token %}  
                 <button class="href" type="submit" value="submit">Search Food</button>
-            </form>
+            </form> -->
+            <span onclick="transitionToPage(`{%url 'searchFood'%}`)" class="href">
+                Search Food
+            </span>
         </div>
     </div>
     <div>
@@ -44,8 +47,8 @@
         <input type="hidden" id="totalProtein" name="totalProtein" value="{{totalProtein}}">
         <input type="hidden" id="totalPotassium" name="totalPotassium" value="{{totalPotassium}}">
         <input type="hidden" id="totalPhosphorus" name="totalPhosphorus" value="{{totalPhosphorus}}">
+        <input type="hidden" id="weightValue" name="weightValue" value="{{weighValue}}">
     </form>
-    <p id="alertMessage"></p>
     <h1><b>FOOD</b></h1>
     <div class='container'>
         {%for food in food %}
@@ -62,26 +65,37 @@
         <img src="{% static 'img/macro.jpg'%}"></img>
         <img src="{% static 'img/water.jpg'%}"></img>
     </div>
-    <!-- <script>
-        // if(sodiumLevel > 2300){
-        //     document.getElementById("alertMessage").innerHTML = "Your sodium level has exceeded the daily value!"
-        //     document.getElementById("alertMessage").style.visibility = visible
-        // }
+    <script>
+        sodiumLevel = document.getElementById('totalSodium').value
+        proteinLevel = document.getElementById('totalProtein').value
+        potassiumLevel = document.getElementById('totalPotassium').value
+        phosphorusLevel = document.getElementById('totalPhosphorus').value
+        weightValue = document.getElementById('weightValue').value
 
-        if(proteinLevel > 0.6 * kg) {
-            document.getElementById("alertMessage").innerHTML = "Your protein level has exceeded the daily value!"
-            document.getElementById("alertMessage").style.visibility = visible
+        alertMessage = ''
+
+        if (sodiumLevel > 2300 || proteinLevel > 0.6 * weightValue || potassiumLevel > 3000 || phosphorusLevel > 1000) {
+            if(sodiumLevel > 2300){
+            alertMessage = alertMessage + "Your sodium level has exceeded the daily value! \n"
+            }
+
+            if(proteinLevel > 0.6 * weightValue) {
+                alertMessage = alertMessage +  "Your protein level has exceeded the daily value! \n"
+            }
+
+            if(potassiumLevel > 3000) {
+                alertMessage = alertMessage +  "Your potassium level has exceeded the daily value! \n"
+            }
+
+            if(phosphorusLevel > 1000) {
+                alertMessage = alertMessage +  "Your phosphorus level has exceeded the daily value!"
+            }
+
+            alert(alertMessage)
         }
 
-        if(potassiumLevel > 3000) {
-            document.getElementById("alertMessage").innerHTML = "Your potassium level has exceeded the daily value!"
-            document.getElementById("alertMessage").style.visibility = visible
-        }
 
-        if(phosphorusLevel > 1000) {
-            document.getElementById("alertMessage").innerHTML = "Your phosphorus level has exceeded the daily value!"
-            document.getElementById("alertMessage").style.visibility = visible
-        }
+        // document.getElementById("alertMessage").innerHTML = alertMessage
     </script>
 </body>
 </html>

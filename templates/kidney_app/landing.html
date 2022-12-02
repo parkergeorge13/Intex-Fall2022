@@ -22,22 +22,24 @@
     </nav>
     <img src="{%static 'img/herbs.jpg'%}" class="woodImage"></img>
     <div class="forms">
-        <p class="signInP">Sign In</p>
+        <p class="signInP">Log In</p>
         <form class="signIn" action="{% url 'sign_in' %}" method="post">
             {% csrf_token %}
             <label for="username">User Name:</label>
             <br>
-            <input type="text" id="username" name="username">
+            <input type="text" id="username" name="username" class="justi">
             <br><br>
             <label for="password">Password:</label>
             <br>
             <input type="password" id="password" name="password">
             <br>
             <br>
-            <span onclick="transitionToPage(`{%url 'index'%}`)" >Create Account</span>
+            <span class="span" onclick="transitionToPage(`{%url 'index'%}`)" >Create Account</span>
             <br><br>
-            <button class="getStartedButton" type="submit" value="submit">                    
-                Sign In
+            <button class="getStartedButton" type="submit" value="submit">   
+                <span onclick="transitionToPage(`{%url 'tracker'%}`)" class="hrefText" >
+                    Log In
+                </span>                 
             </button>
         </form> 
     </div>

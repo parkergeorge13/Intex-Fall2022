@@ -319,3 +319,18 @@ span {
 .createFood button {
     margin-left:calc(100vw * 0.07);
 }
+
+/* Edit Food Page */
+
+.editBar {
+    margin-top: calc(100vh * 0.07);
+    margin-left: calc(100vw * 0.35);
+}
+
+.editBar input {
+    background-color: #FEF9F5;
+    border:none;
+    padding: 1rem;
+    border-radius: 15px;
+    width: 7%;
+}

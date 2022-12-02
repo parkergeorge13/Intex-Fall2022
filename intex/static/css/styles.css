@@ -50,6 +50,10 @@ span {
     z-index: 0;
 }
 
+.forms {
+    margin-left: calc(0.5 * 100vw);
+    margin-top: calc(-0.73 * 100vh)
+}
 
 .signInP{
     font-size: 40px;
@@ -62,13 +66,14 @@ span {
     border-radius: 15px;
     z-index: 4;
     width: 40%
+    
 }
 
 .signIn input{
     padding-bottom: 3px;
 }
 
-.signIn span {
+.signIn .span {
     font-size:12px;
     text-decoration: underline;
 }
@@ -182,8 +187,8 @@ span {
 
 /* Tracker Page */ 
 .dateLog {
-    margin-left: calc(0.13 * 100vw);
-    margin-top: calc(0.03 * 100vh);
+    margin-left: calc(0.18 * 100vw);
+    margin-top: calc(0.13 * 100vh);
 
 }
 
@@ -193,7 +198,11 @@ span {
     padding: 1rem;
     border-radius: 15px;
     z-index: 4;
-    width: 10%
+    width: 10%;
+}
+
+.dateLog label {
+    margin-right: calc(0.005 * 100vw)
 }
 
 .select {
@@ -224,7 +233,6 @@ span {
     box-shadow: 2px 2px 5px #F8C997;
     transition-duration: 0.5s;
     font-size: 20px;
-    /* margin: 5rem 3rem -1rem 0.4rem; */
     margin-top: calc(0.1 * (100vh - 6rem));
     margin-right: calc(0.05 * (100vw - 6rem));
 
@@ -260,7 +268,7 @@ span {
     border: 1px solid black;
     width: 40%; 
     margin-left: calc(0.5 * 100vw);
-    margin-top: calc(-0.1 * 100vh);
+    margin-top: calc(-0.27 * 100vh);
     background-color: #FDF4EB;
     border-radius: 1.2rem;
     border:none;
@@ -344,4 +352,74 @@ span {
 
 .createFood button {
     margin-left:calc(100vw * 0.07);
+}
+
+/* Edit Food Page */
+
+.editBar {
+    margin: 0 auto;
+    width: 120%;
+    padding-top: calc(100vh * 0.07);
+    padding-left: calc(100vw * 0.42);
+}
+
+.editBar label {
+    text-align: center;
+}
+
+.editBar input {
+    background-color: #FEF9F5;
+    border:none;
+    margin-right: calc(100vw * 0.02);
+    padding: 1rem;
+    border-radius: 15px;
+    width: 7%;
+}
+
+/* Show Nutritient Page */
+table, th, td {
+    border: 1px solid #C1C1C1;
+    border-collapse: separate !important;
+    text-align: center;
+    background-color: #FCEEDF;
+}
+
+.bordered {
+    border: solid #ccc 1px;
+    -moz-border-radius: 40px;
+    -webkit-border-radius: 40px;
+    border-radius: 40px;
+    -webkit-box-shadow: 0 1px 1px #F4CCCC;
+    -moz-box-shadow: 0 1px 1px #F4CCCC;
+    box-shadow: 0 1px 1px #F4CCCC;
+}
+
+tr:nth-child(even) {
+    background-color: #F9CB9C;
+  }
+
+.bordered tr:last-child td:last-child {
+    -moz-border-radius: 0 0 40px 0;
+    -webkit-border-radius: 0 0 40px 0;
+    border-radius: 0 0 40px 0;
+} 
+.bordered th:first-child {
+    -moz-border-radius: 40px 0 0 0;
+    -webkit-border-radius: 40px 0 0 0;
+    border-radius: 40px 0 0 0;
+}
+.bordered th:last-child {
+    -moz-border-radius: 0 40px 0 0;
+    -webkit-border-radius: 0 40px 0 0;
+    border-radius: 0 40px 0 0;
+}
+.bordered th:only-child{
+    -moz-border-radius: 40px 40px 0 0;
+    -webkit-border-radius: 40px 40px 0 0;
+    border-radius: 40px 40px 0 0;
+}
+.bordered tr:last-child td:first-child {
+    -moz-border-radius: 0 0 0 40px;
+    -webkit-border-radius: 0 0 0 40px;
+    border-radius: 0 0 0 40px;
 }

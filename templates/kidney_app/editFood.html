@@ -1,18 +1,40 @@
 {%load static%}
 {%block content%}
-<div class="container">
-    <div class="text-left">
-        <h2 class="section-heading text-uppercase">Edit Food</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{%static 'css/styles.css' %}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <script src="{% static 'js/myscripts.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="{%static 'img/NKFLogo.svg'%}" onclick="transitionToPage(`{%url 'landing'%}`)"></img>
+        <div class="links">
+            <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Log Out</span>
+            <button class="getStartedButton">                    
+                <span onclick="transitionToPage(`{%url 'index'%}`)" class="hrefText">Tracker</span>
+            </button>
+        </div>
+    </nav>
+    <div class="logBar">
+        <div class="inline_block grey">
+            Edit Food
+        </div>
     </div>
-    <br>
-    <form name="form" method="post" action="{% url 'editFood' %}">
-        {%csrf_token%}
-        <input type="hidden" id="id" name="id" value="{{food.id}}">
+    <div class="editBar">
+        <form name="form" method="post" action="{% url 'editFood' %}">
+            {%csrf_token%}
+            <input type="hidden" id="id" name="id" value="{{food.id}}">
 
-        <label for='food_desc'>Food Name</label>
-        <input type="text" name='food_desc' id='food_desc' value="{{food.food_desc}}" autofocus>
-        <br>
-
-        <button type="submit">Add</button>
-    </form>
+            <label for='food_desc'>Food Name</label>
+            <br><br>
+            <input type="text" name='food_desc' id='food_desc' value="{{food.food_desc}}" autofocus>
+            <button class="getStartedButton" type="submit">Add</button>
+        </form>
+    </div>
 {%endblock%}

@@ -206,6 +206,11 @@ def searchFoodDisplayPageView(request):
         'mealName': glo_meal,
         'meal_date' : glo_date,
         'servings': servings,
+        'totalSodium': totalSodium,
+        'totalProtein': totalProtein,
+        'totalPotassium': totalPotassium,
+        'totalPhosphorus': totalPhosphorus,
+        'weightValue': weightValue
     } 
 
     return render(request, 'kidney_app/displayFood.html', context)
@@ -261,38 +266,51 @@ def createFoodPageView(request):
         cursor = connection.cursor()
         cursor.execute(f"SELECT SUM(nutrient.sodium)as sodium FROM kidney_app_food food JOIN kidney_app_nutrient_food as nf ON nf.food_id = food.id JOIN kidney_app_nutrient as nutrient ON nf.nutrient_id = nutrient.id JOIN kidney_app_food_journal_entry as fje ON fje.food_id = food.id JOIN kidney_app_journal_entry as journal ON fje.journal_entry_id = journal.id GROUP BY journal.date HAVING journal.date = '{date}';")
         sodium = cursor.fetchone()
-        totalSodium = sodium[0]
-        cursor.close()
+        totalsodium = sodium[0]
 
         # protein
         cursor = connection.cursor()
         cursor.execute(f"SELECT SUM(nutrient.protein)as protein FROM kidney_app_food food JOIN kidney_app_nutrient_food as nf ON nf.food_id = food.id JOIN kidney_app_nutrient as nutrient ON nf.nutrient_id = nutrient.id JOIN kidney_app_food_journal_entry as fje ON fje.food_id = food.id JOIN kidney_app_journal_entry as journal ON fje.journal_entry_id = journal.id GROUP BY journal.date HAVING journal.date = '{date}';")
         protein = cursor.fetchone()
-        totalProtein = protein[0]
-        cursor.close()
+        totalprotein = protein[0]
 
         # potassium
         cursor = connection.cursor()
         cursor.execute(f"SELECT SUM(nutrient.potassium)as potassium FROM kidney_app_food food JOIN kidney_app_nutrient_food as nf ON nf.food_id = food.id JOIN kidney_app_nutrient as nutrient ON nf.nutrient_id = nutrient.id JOIN kidney_app_food_journal_entry as fje ON fje.food_id = food.id JOIN kidney_app_journal_entry as journal ON fje.journal_entry_id = journal.id GROUP BY journal.date HAVING journal.date = '{date}';")
         potassium = cursor.fetchone()
-        totalPotassium = potassium[0]
-        cursor.close()
+        totalpotassium = potassium[0]
 
         # phophorus
         cursor = connection.cursor()
         cursor.execute(f"SELECT SUM(nutrient.phosphorus)as phosphorus FROM kidney_app_food food JOIN kidney_app_nutrient_food as nf ON nf.food_id = food.id JOIN kidney_app_nutrient as nutrient ON nf.nutrient_id = nutrient.id JOIN kidney_app_food_journal_entry as fje ON fje.food_id = food.id JOIN kidney_app_journal_entry as journal ON fje.journal_entry_id = journal.id GROUP BY journal.date HAVING journal.date = '{date}';")
         phophorus = cursor.fetchone()
-        totalPhosphorus = phophorus[0]
+        totalphosphorus = phophorus[0]
+
+        cursor = connection.cursor()
+        cursor.execute(f"SELECT weight from kidney_app_account where id = '{acc_pk}';")
+        weight = cursor.fetchone()
+        weightvalue = weight[0]
+
+        global totalSodium 
+        totalSodium = totalsodium
+        global totalProtein 
+        totalProtein = totalprotein
+        global totalPotassium 
+        totalPotassium = totalpotassium
+        global totalPhosphorus 
+        totalPhosphorus = totalphosphorus
+        global weightValue 
+        weightValue = weightvalue
         
         context = {
             'totalSodium': totalSodium,
             'totalProtein': totalProtein,
             'totalPotassium': totalPotassium,
             'totalPhosphorus': totalPhosphorus,
+            'weightValue': weightValue
         }
-        cursor.close()
-        return searchFoodDisplayPageView(request)
-        
+
+        return searchFoodDisplayPageView(request)   
     else :
         return render(request, 'kidney_app/searchFood.html')
 
@@ -329,6 +347,7 @@ def search_food(request):
         'mealName': mealName,
         'meal_date' : meal_date
     }
+
     
     return render(request, 'kidney_app/searchFood.html', context)     
 

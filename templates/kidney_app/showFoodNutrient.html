@@ -1,12 +1,52 @@
 {%load static%}
 {%block content%}
-<h2>Nutrients for {{food}}</h2>
-<br>
-<p>Sodium: {{sodium}}</p>
-<p>Protein: {{protein}}</p>
-<p>Potassium: {{potassium}}</p>
-<p>Phospherous: {{phosphorus}}</p>
-<p>Servings: {{servings}}</p>
-<br>
-<br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{%static 'css/styles.css' %}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <script src="{% static 'js/myscripts.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="{%static 'img/NKFLogo.svg'%}" onclick="transitionToPage(`{%url 'landing'%}`)"></img>
+        <div class="links">
+            <span onclick="transitionToPage(`{%url 'landing'%}`)" class="homeButton">Log Out</span>
+            <button class="getStartedButton">                    
+                <span onclick="transitionToPage(`{%url 'displayFood'%}`)" class="hrefText">Food Journal</span>
+            </button>
+        </div>
+    </nav>
+    <br><br>
+    <h2 align="center">Nutrients for {{food}}</h2>
+    <br>
+    <table style="width:30%; height: 40%; margin: 0 auto" class="bordered">
+        <thead>
+            <tr>
+            <th>Nutrients</th>
+            <th>Values</th>
+            </tr>
+            <tr>
+            <td>Sodium</td>
+            <td>{{sodium}}</td>
+            </tr>
+            <tr>
+                <td>Protein</td>
+                <td>{{protein}}</td>
+            </tr>
+            <tr>
+                <td>Potassium</td>
+                <td>{{potassium}}</td>
+            </tr>
+            <tr>
+                <td>Phosphorus</td>
+                <td>{{phosphorus}}</td>
+            </tr>
+        </thead>
+    </table>
+</body>
 {%endblock%}
